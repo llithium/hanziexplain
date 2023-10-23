@@ -1,15 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import axios from "axios";
 import CcdbUtil from "./CcdbUtil";
 import { useDisclosure } from "@mantine/hooks";
-import { AppShell, Burger, Group, Button, TextInput } from "@mantine/core";
+import { AppShell, Burger, Group, TextInput } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 
 const apiURL = "http://ccdb.hemiola.com";
 
 function App() {
   const [opened, { toggle }] = useDisclosure();
+  const [searchValue, setSearchValue] = useState("");
+  const [searchResult, setSearchResult] = useState();
+
+  useEffect(() => {
+    async function search() {
+      const response = await axios.get(
+        apiURL + "/characters/?filter=gb&fields=string,kDefinition,kMandarin"
+      );
+      const result = response.data.filter((data) => {
+        return data.string == searchValue;
+      });
+      console.log(result);
+    }
+    search();
+  }, [searchValue]);
+
+  function handleSearch(event) {
+    const value = event.target.value;
+    console.log(value);
+    setSearchValue(value);
+  }
 
   return (
     <AppShell
@@ -34,6 +55,8 @@ function App() {
           </Group>
           <Group justify="center" h="100%" px="md">
             <TextInput
+              value={searchValue}
+              onChange={handleSearch}
               leftSection={
                 <IconSearch
                   // style={{ width: rem(18), height: rem(18) }}
@@ -49,11 +72,14 @@ function App() {
         </div>
       </AppShell.Header>
       <AppShell.Navbar p="md">
-        <TextInput hiddenFrom="xs" placeholder="Input placeholder" />
+        <TextInput
+          value={searchValue}
+          onChange={handleSearch}
+          hiddenFrom="xs"
+          placeholder="Input placeholder"
+        />
       </AppShell.Navbar>
-      <AppShell.Main>
-        <Button variant="filled">Button</Button>
-      </AppShell.Main>
+      <AppShell.Main></AppShell.Main>
     </AppShell>
   );
 }
