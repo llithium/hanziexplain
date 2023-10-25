@@ -11,30 +11,40 @@ const apiURL = "http://ccdb.hemiola.com";
 function App() {
   const [opened, { toggle }] = useDisclosure();
   const [searchValue, setSearchValue] = useState("");
+  const [requestResponse, setRequestResponse] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    async function search() {
-      const response = await axios.get(
-        apiURL + "/characters/?filter=gb&fields=string,kDefinition,kMandarin"
+    async function request() {
+      setRequestResponse(
+        await axios.get(
+          apiURL + "/characters/?filter=gb&fields=string,kDefinition,kMandarin"
+        )
       );
-      const result = response.data.filter((element) => {
+    }
+    request();
+  }, []);
+
+  useEffect(() => {
+    async function search() {
+      const result = requestResponse.data.filter((element) => {
         return element.string == searchValue;
       });
-      searchValue ? setSearchResults([...result]) : setSearchResults([]);
-      const resultPinyin = response.data.filter((element) => {
-        //
+      const resultPinyin = requestResponse.data.filter((element) => {
         if (element.kMandarin !== null && element.kMandarin !== undefined) {
           return element.kMandarin.includes(searchValue.toUpperCase());
         }
       });
-      searchValue ? setSearchResults([...resultPinyin]) : setSearchResults([]);
+      searchValue
+        ? setSearchResults([...result, ...resultPinyin])
+        : setSearchResults([]);
     }
     search();
   }, [searchValue]);
 
   //For testing
   useEffect(() => {
+    console.log(requestResponse);
     console.log(searchResults);
   }, [searchResults]);
 
@@ -92,7 +102,6 @@ function App() {
         />
       </AppShell.Navbar>
       <AppShell.Main>
-        <p>{searchValue}</p>
         {searchResults.map((res, index) => {
           return (
             <p key={index}>
