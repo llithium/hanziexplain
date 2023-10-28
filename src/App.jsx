@@ -103,9 +103,15 @@ function App() {
       </AppShell.Navbar>
       <AppShell.Main>
         {searchResults.map((res, index) => {
+          const pinyin = res.kMandarin.split(" ");
+          // console.log(pinyin)
+          const convertedPinyin = pinyin.map((item) => {
+            return CcdbUtil.convertPinyin(item) + ", "
+          })
+          // console.log(convertedPinyin)
           return (
             <p key={index}>
-              {res.string}, {res.kMandarin}, {res.kDefinition}
+              {res.string}, {convertedPinyin} {res.kDefinition}
             </p>
           );
         })}
