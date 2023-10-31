@@ -18,6 +18,21 @@ h1 {
   margin: 0;
 }
 
+p {
+  margin: 0;
+}
+
+.string {
+  display: inline-block;
+  font-size: 3rem;
+  margin-right: 20px;
+}
+
+.pinyin {
+  display: inline-block;
+  font-size: 1.2rem;
+}
+
 .headerInner {
   display: flex;
   justify-content: space-between;

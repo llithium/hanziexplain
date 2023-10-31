@@ -106,13 +106,22 @@ function App() {
           const pinyin = res.kMandarin.split(" ");
           // console.log(pinyin)
           const convertedPinyin = pinyin.map((item) => {
-            return CcdbUtil.convertPinyin(item) + ", "
-          })
-          // console.log(convertedPinyin)
+            return CcdbUtil.convertPinyin(item) + ", ";
+          });
+          // console.log(convertedPinyin);
           return (
-            <p key={index}>
-              {res.string}, {convertedPinyin} {res.kDefinition}
-            </p>
+            <div>
+              <p className="string" key={index}>
+                {res.string}
+              </p>
+              <p className="pinyin" key={index}>
+                {convertedPinyin}
+              </p>
+              <p className="definition" key={index}>
+                {res.kDefinition}
+              </p>
+              <hr></hr>
+            </div>
           );
         })}
       </AppShell.Main>
