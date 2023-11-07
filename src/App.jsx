@@ -42,16 +42,29 @@ function App() {
     search();
   }, [searchValue]);
 
-  //For testing
+  //For Testing
   useEffect(() => {
-    console.log(requestResponse);
-    console.log(searchResults);
+    // console.log(requestResponse);
+    // console.log(searchResults);
   }, [searchResults]);
 
   function handleSearch(event) {
     const value = event.target.value;
     // console.log(value);
     setSearchValue(value);
+  }
+
+  function handleClick(event) {
+    const innerHTML = event.currentTarget.firstChild.innerHTML;
+    const id = event.currentTarget.querySelector("div").id;
+    console.log(id);
+    const writer = HanziWriter.create(id, innerHTML, {
+      width: 150,
+      height: 150,
+      padding: 5,
+      // strokeAnimationSpeed: 5,
+      delayBetweenStrokes: 190, // milliseconds
+    }).loopCharacterAnimation();
   }
 
   return (
@@ -110,10 +123,11 @@ function App() {
           });
           // console.log(convertedPinyin);
           return (
-            <div>
+            <div onClick={handleClick}>
               <p className="string" key={index}>
                 {res.string}
               </p>
+              <div id={index} key={index}></div>
               <p className="pinyin" key={index}>
                 {convertedPinyin}
               </p>
