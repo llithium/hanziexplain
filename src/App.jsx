@@ -57,14 +57,23 @@ function App() {
   function handleClick(event) {
     const innerHTML = event.currentTarget.firstChild.innerHTML;
     const id = event.currentTarget.querySelector("div").id;
-    console.log(id);
-    const writer = HanziWriter.create(id, innerHTML, {
-      width: 150,
-      height: 150,
-      padding: 5,
-      // strokeAnimationSpeed: 5,
-      delayBetweenStrokes: 190, // milliseconds
-    }).loopCharacterAnimation();
+    console.log(event.currentTarget.querySelector("div").hidden);
+    if (event.currentTarget.querySelector("div").querySelector("svg")) {
+      if (event.currentTarget.querySelector("div").hidden == false) {
+        console.log("bingo");
+        event.currentTarget.querySelector("div").setAttribute("hidden", true);
+      } else {
+        event.currentTarget.querySelector("div").removeAttribute("hidden");
+      }
+    } else {
+      const writer = HanziWriter.create(id, innerHTML, {
+        width: 150,
+        height: 150,
+        padding: 5,
+        // strokeAnimationSpeed: 5,
+        delayBetweenStrokes: 190, // milliseconds
+      }).loopCharacterAnimation();
+    }
   }
 
   return (
@@ -123,7 +132,7 @@ function App() {
           });
           // console.log(convertedPinyin);
           return (
-            <div onClick={handleClick}>
+            <div onClick={handleClick} key={index}>
               <p className="string" key={index}>
                 {res.string}
               </p>
