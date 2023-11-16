@@ -35,8 +35,18 @@ function App() {
           return element.kMandarin.includes(searchValue.toUpperCase());
         }
       });
+      const resultDefinition = requestResponse.data.filter((element) => {
+        if (
+          element.kDefinition !== null &&
+          element.kDefinition !== undefined &&
+          searchValue.length >= 3
+        ) {
+          return element.kDefinition.includes(searchValue);
+        }
+      });
+      console.log(resultDefinition);
       searchValue
-        ? setSearchResults([...result, ...resultPinyin])
+        ? setSearchResults([...result, ...resultPinyin, ...resultDefinition])
         : setSearchResults([]);
     }
     search();
@@ -125,12 +135,12 @@ function App() {
       </AppShell.Navbar>
       <AppShell.Main>
         {searchResults.map((res, index) => {
-          const pinyin = res.kMandarin.split(" ");
-          // console.log(pinyin)
-          const convertedPinyin = pinyin.map((item) => {
-            return CcdbUtil.convertPinyin(item) + ", ";
-          });
-          // console.log(convertedPinyin);
+          const pinyin = res.kMandarin ? res.kMandarin.split(" ") : "";
+          const convertedPinyin = res.kMandarin
+            ? pinyin.map((item) => {
+                return CcdbUtil.convertPinyin(item) + ", ";
+              })
+            : "";
           return (
             <div onClick={handleClick} key={index}>
               <p className="string" key={index}>
