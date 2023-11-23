@@ -65,24 +65,35 @@ function App() {
   }
 
   function handleClick(event) {
-    const innerHTML = event.currentTarget.firstChild.innerHTML;
-    const id = event.currentTarget.querySelector("div").id;
-    console.log(event.currentTarget.querySelector("div").hidden);
-    if (event.currentTarget.querySelector("div").querySelector("svg")) {
-      if (event.currentTarget.querySelector("div").hidden == false) {
-        console.log("bingo");
-        event.currentTarget.querySelector("div").setAttribute("hidden", true);
+    const character = event.currentTarget.firstChild.innerHTML;
+    const id = event.currentTarget.querySelector("svg").id;
+    console.log(
+      window.getComputedStyle(event.currentTarget.querySelector("svg")).display
+    );
+    if (event.currentTarget.querySelector("svg").querySelector("g")) {
+      if (
+        window.getComputedStyle(event.currentTarget.querySelector("svg"))
+          .display == "none"
+      ) {
+        event.currentTarget
+          .querySelector("svg")
+          .setAttribute("display", "inline");
       } else {
-        event.currentTarget.querySelector("div").removeAttribute("hidden");
+        event.currentTarget
+          .querySelector("svg")
+          .setAttribute("display", "none");
       }
     } else {
-      const writer = HanziWriter.create(id, innerHTML, {
-        width: 150,
-        height: 150,
+      const writer = HanziWriter.create(id, character, {
+        width: 200,
+        height: 200,
         padding: 5,
         // strokeAnimationSpeed: 5,
         delayBetweenStrokes: 190, // milliseconds
       }).loopCharacterAnimation();
+      event.currentTarget
+        .querySelector("svg")
+        .setAttribute("display", "inline");
     }
   }
 
@@ -146,7 +157,20 @@ function App() {
               <p className="string" key={index}>
                 {res.string}
               </p>
-              <div id={index} key={index}></div>
+              {/* <div id={index} key={index}></div> */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="200"
+                height="200"
+                id={index}
+                key={index}
+                display="none"
+              >
+                <line x1="0" y1="0" x2="200" y2="200" stroke="#DDD" />
+                <line x1="200" y1="0" x2="0" y2="200" stroke="#DDD" />
+                <line x1="100" y1="0" x2="100" y2="200" stroke="#DDD" />
+                <line x1="0" y1="100" x2="200" y2="100" stroke="#DDD" />
+              </svg>
               <p className="pinyin" key={index}>
                 {convertedPinyin}
               </p>
