@@ -158,15 +158,12 @@ function App() {
             : "";
           return (
             <div onClick={handleClick} key={index}>
-              <p className="string" key={index}>
-                {res.string}
-              </p>
+              <p className="string">{res.string}</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="200"
                 height="200"
                 id={index}
-                key={index}
                 display="none"
               >
                 <line x1="0" y1="0" x2="200" y2="200" stroke="#DDD" />
@@ -174,12 +171,8 @@ function App() {
                 <line x1="100" y1="0" x2="100" y2="200" stroke="#DDD" />
                 <line x1="0" y1="100" x2="200" y2="100" stroke="#DDD" />
               </svg>
-              <p className="pinyin" key={index}>
-                {convertedPinyin}
-              </p>
-              <p className="definition" key={index}>
-                {res.kDefinition}
-              </p>
+              <p className="pinyin">{convertedPinyin}</p>
+              <p className="definition">{res.kDefinition}</p>
               <hr></hr>
             </div>
           );
