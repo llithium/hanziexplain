@@ -40,6 +40,13 @@ p {
   height: 100%;
 }
 
+.mantine-AppShell-main {
+  padding-bottom: 16px;
+  padding-left: 70px !important;
+  padding-right: 70px !important;
+  padding-top: 76px;
+}
+
 @media (max-width: 520px) {
   h1 {
     font-size: 22px;

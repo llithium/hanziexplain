@@ -28,8 +28,10 @@ function App() {
   useEffect(() => {
     async function search() {
       const result = requestResponse.data.filter((element) => {
-        return element.string == searchValue;
+        // return element.string == searchValue;
+        return searchValue.split("").includes(element.string);
       });
+      // console.log(result);
       const resultPinyin = requestResponse.data.filter((element) => {
         if (element.kMandarin !== null && element.kMandarin !== undefined) {
           return element.kMandarin.includes(searchValue.toUpperCase());
@@ -44,7 +46,7 @@ function App() {
           return element.kDefinition.includes(searchValue);
         }
       });
-      console.log(resultDefinition);
+      // const resultMultiCharacter = requestResponse.data.filter((element) => {});
       searchValue
         ? setSearchResults([...result, ...resultPinyin, ...resultDefinition])
         : setSearchResults([]);
@@ -113,10 +115,12 @@ function App() {
             <Burger
               opened={opened}
               onClick={toggle}
-              hiddenFrom="sm"
+              hiddenFrom="xs"
               size="sm"
             />
-            <h1 style={{ margin: 0 }}>Hanzi Explain</h1>
+            <a style={{ all: "unset" }} href="/">
+              <h1 style={{ margin: 0 }}>Hanzi Explain</h1>
+            </a>
           </Group>
           <Group justify="center" h="100%" px="md">
             <TextInput
@@ -136,7 +140,7 @@ function App() {
           <div></div>
         </div>
       </AppShell.Header>
-      <AppShell.Navbar p="md">
+      <AppShell.Navbar hiddenFrom="xs" p="md">
         <TextInput
           value={searchValue}
           onChange={handleSearch}
@@ -157,7 +161,6 @@ function App() {
               <p className="string" key={index}>
                 {res.string}
               </p>
-              {/* <div id={index} key={index}></div> */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="200"
