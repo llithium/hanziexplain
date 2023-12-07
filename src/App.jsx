@@ -79,7 +79,7 @@ function App() {
       ) {
         event.currentTarget
           .querySelector("svg")
-          .setAttribute("display", "inline");
+          .setAttribute("display", "block");
       } else {
         event.currentTarget
           .querySelector("svg")
@@ -93,9 +93,7 @@ function App() {
         // strokeAnimationSpeed: 5,
         delayBetweenStrokes: 190, // milliseconds
       }).loopCharacterAnimation();
-      event.currentTarget
-        .querySelector("svg")
-        .setAttribute("display", "inline");
+      event.currentTarget.querySelector("svg").setAttribute("display", "block");
     }
   }
 
@@ -166,10 +164,33 @@ function App() {
                 id={index}
                 display="none"
               >
-                <line x1="0" y1="0" x2="200" y2="200" stroke="#DDD" />
-                <line x1="200" y1="0" x2="0" y2="200" stroke="#DDD" />
+                <line
+                  x1="0"
+                  y1="0"
+                  x2="200"
+                  y2="200"
+                  stroke="#DDD"
+                  stroke-dasharray="4"
+                />
+                <line
+                  x1="200"
+                  y1="0"
+                  x2="0"
+                  y2="200"
+                  stroke="#DDD"
+                  stroke-dasharray="4"
+                />
                 <line x1="100" y1="0" x2="100" y2="200" stroke="#DDD" />
                 <line x1="0" y1="100" x2="200" y2="100" stroke="#DDD" />
+                <rect
+                  x="0"
+                  y="0"
+                  width="200"
+                  height="200"
+                  fill="none"
+                  stroke="#000"
+                  stroke-width="2"
+                />
               </svg>
               <p className="pinyin">{convertedPinyin}</p>
               <p className="definition">{res.kDefinition}</p>
