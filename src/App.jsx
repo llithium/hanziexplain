@@ -18,7 +18,7 @@ function App() {
     async function request() {
       setRequestResponse(
         await axios.get(
-          apiURL + "/characters/?filter=gb&fields=string,kDefinition,kMandarin"
+          "/api/characters/?filter=gb&fields=string,kDefinition,kMandarin"
         )
       );
     }
