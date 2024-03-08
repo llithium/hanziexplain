@@ -3,7 +3,7 @@ import "./App.css";
 import axios from "axios";
 import CcdbUtil from "./CcdbUtil";
 import { useDisclosure } from "@mantine/hooks";
-import { AppShell, Burger, Group, TextInput } from "@mantine/core";
+import { FocusTrap, AppShell, Burger, Group, TextInput } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 
 const apiURL = "http://ccdb.hemiola.com";
@@ -121,19 +121,21 @@ function App() {
             </a>
           </Group>
           <Group justify="center" h="100%" px="md">
-            <TextInput
-              value={searchValue}
-              onChange={handleSearch}
-              leftSection={
-                <IconSearch
-                  // style={{ width: rem(18), height: rem(18) }}
-                  stroke={1.5}
-                />
-              }
-              visibleFrom="xs"
-              w={{ base: 200, sm: 400, md: 500 }}
-              placeholder="Input placeholder"
-            />
+            <FocusTrap>
+              <TextInput
+                value={searchValue}
+                onChange={handleSearch}
+                leftSection={
+                  <IconSearch
+                    // style={{ width: rem(18), height: rem(18) }}
+                    stroke={1.5}
+                  />
+                }
+                visibleFrom="xs"
+                w={{ base: 200, sm: 400, md: 500 }}
+                placeholder="Input Character, Pinyin or Definition"
+              />
+            </FocusTrap>
           </Group>
           <div></div>
         </div>
@@ -143,7 +145,7 @@ function App() {
           value={searchValue}
           onChange={handleSearch}
           hiddenFrom="xs"
-          placeholder="Input placeholder"
+          placeholder="Input Character, Pinyin or Definition"
         />
       </AppShell.Navbar>
       <AppShell.Main>
