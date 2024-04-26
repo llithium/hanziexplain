@@ -16,9 +16,14 @@ function App() {
 
   useEffect(() => {
     async function request() {
+      // setRequestResponse(
+      //   await axios.get(
+      //     "/api/characters/?filter=gb&fields=string,kDefinition,kMandarin"
+      //   )
+      // );
       setRequestResponse(
         await axios.get(
-          "/api/characters/?filter=gb&fields=string,kDefinition,kMandarin"
+          apiURL + "/characters/?filter=gb&fields=string,kDefinition,kMandarin"
         )
       );
     }
