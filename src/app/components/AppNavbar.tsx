@@ -1,7 +1,6 @@
 "use client";
 import {
   Navbar,
-  NavbarBrand,
   NavbarContent,
   NavbarItem,
   NavbarMenuToggle,
@@ -17,7 +16,7 @@ import {
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import SearchInput from "./SearchInput";
+import SearchInput from "@/app/components/SearchInput";
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
