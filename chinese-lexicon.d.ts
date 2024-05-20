@@ -1,9 +1,9 @@
-export interface ChineseLexicon {
-  search: (term: string, limit?: number) => SearchResult[];
-  getEntries: (word: string) => Entry[];
-  getEtymology: (character: string) => Etymology;
-  getGloss: (character: string, pinyin?: string) => string;
-  allEntries: Entry[];
+declare module "chinese-lexicon" {
+  export function search(term: string, limit?: number): SearchResult[];
+  export function getEntries(word: string): Entry[];
+  export function getEtymology(character: string): Etymology;
+  export function getGloss(character: string, pinyin?: string): string;
+  export const allEntries: Entry[];
 }
 
 export interface SearchResult {

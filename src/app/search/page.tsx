@@ -1,12 +1,11 @@
-import { ChineseLexicon } from "@/app/types";
-const chineseLexicon = require("chinese-lexicon") as ChineseLexicon;
+import { search } from "chinese-lexicon";
 
 export default function Search({
   searchParams,
 }: {
   searchParams: { q: string };
 }) {
-  const searchResults = chineseLexicon.search(searchParams.q);
+  const searchResults = search(searchParams.q);
   console.log(searchResults);
 
   return (
