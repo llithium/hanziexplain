@@ -1,6 +1,5 @@
 "use client";
 import { Input } from "@nextui-org/react";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 const SearchInput = () => {
