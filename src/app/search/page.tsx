@@ -12,7 +12,11 @@ export default function Search({
     <div>
       {searchParams.q &&
         searchResults.map((result) => {
-          return <div key={result.definitions[0]}> {result.simp}</div>;
+          return (
+            <div className="font-hans" key={result.definitions[0]}>
+              {result.simp}
+            </div>
+          );
         })}
     </div>
   );
