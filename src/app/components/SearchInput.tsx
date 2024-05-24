@@ -1,17 +1,21 @@
 "use client";
 import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDebounce } from "@uidotdev/usehooks";
 
 const SearchInput = () => {
   const router = useRouter();
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+  useEffect(() => {
+    router.push(`/search?q=${debouncedSearchTerm}`);
+  }, [debouncedSearchTerm, router]);
   return (
     <Input
       className="w-full"
       name="search"
-      onValueChange={(value) => {
-        router.push(`/search?q=${value}`);
-      }}
+      onValueChange={(value) => setSearchTerm(value)}
       classNames={{
         base: "w-full h-10",
         mainWrapper: "h-full",
