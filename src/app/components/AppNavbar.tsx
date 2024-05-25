@@ -17,6 +17,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import SearchInput from "@/app/components/SearchInput";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,7 +54,6 @@ export default function AppNavbar() {
                 className={`flex items-center px-0 pl-2  text-medium text-foreground transition-opacity hover:opacity-80 active:opacity-disabled ${
                   pathname.startsWith("/default") && "font-semibold"
                 }`}
-                // color="foreground"
                 variant="light"
                 endContent={
                   <svg
@@ -105,6 +105,9 @@ export default function AppNavbar() {
           <Button as={Link} color="primary" href="/signup" variant="shadow">
             Sign Up
           </Button>
+        </NavbarItem>
+        <NavbarItem>
+          <ThemeSwitcher />
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>

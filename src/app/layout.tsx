@@ -24,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${notoSansSC.variable} font-sans`}>
-        <AppNavbar />
-        <Providers>{children} </Providers>
+        <Providers>
+          <AppNavbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );
