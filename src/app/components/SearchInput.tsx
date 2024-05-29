@@ -7,9 +7,11 @@ import { useDebounce } from "@uidotdev/usehooks";
 const SearchInput = () => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
+  const [rendered, setRendered] = useState(false);
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
   useEffect(() => {
-    router.push(`/search?q=${debouncedSearchTerm}`);
+    rendered && router.push(`/search?q=${debouncedSearchTerm}`);
+    setRendered(true);
   }, [debouncedSearchTerm, router]);
   return (
     <Input

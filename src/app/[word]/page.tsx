@@ -12,7 +12,8 @@ export async function generateMetadata({
 export default function Page({ params }: { params: { word: string } }) {
   const word = decodeURIComponent(params.word);
   const entries = getEntries(word);
-  console.log(entries);
 
-  return <div>{entries[0].definitions[0]}</div>;
+  return (
+    <div className="w-full px-2 font-hans text-3xl">{entries[0].simp}</div>
+  );
 }

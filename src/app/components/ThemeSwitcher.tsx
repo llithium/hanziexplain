@@ -19,6 +19,7 @@ const ThemeSwitcher = () => {
       <Button
         className="bg-transparent"
         isIconOnly
+        aria-label="Theme switcher"
         onClick={() => {
           theme == "dark" && setTheme("light");
           theme == "light" && setTheme("dark");
