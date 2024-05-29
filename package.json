@@ -13,6 +13,7 @@
     "@uidotdev/usehooks": "^2.4.1",
     "chinese-lexicon": "^1.0.43",
     "framer-motion": "^11.2.6",
+    "hanzi-writer": "^3.7.0",
     "next": "14.2.3",
     "next-themes": "^0.3.0",
     "react": "^18",
