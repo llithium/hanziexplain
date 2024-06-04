@@ -1,6 +1,19 @@
 import { Divider } from "@nextui-org/divider";
 import { search } from "chinese-lexicon";
+import { Metadata } from "next";
 import Link from "next/link";
+
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: { q: string };
+}): Promise<Metadata> {
+  const search = searchParams.q;
+
+  return {
+    title: `${search} · Hanzi Explain`,
+  };
+}
 
 export default function Search({
   searchParams,

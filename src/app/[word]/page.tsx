@@ -7,7 +7,7 @@ export async function generateMetadata({
   params: { word: string };
 }): Promise<Metadata> {
   const word = decodeURIComponent(params.word);
-  return { title: `${word} - Hanzi Explain` };
+  return { title: `${word} · Hanzi Explain` };
 }
 
 export default function Page({ params }: { params: { word: string } }) {

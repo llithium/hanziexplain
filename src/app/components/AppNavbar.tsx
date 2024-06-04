@@ -6,13 +6,14 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Button,
+} from "@nextui-org/navbar";
+import {
   Dropdown,
   DropdownTrigger,
   DropdownMenu,
   DropdownItem,
-} from "@nextui-org/react";
-
+} from "@nextui-org/dropdown";
+import { Button } from "@nextui-org/button";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
@@ -27,7 +28,7 @@ export default function AppNavbar() {
     <Navbar className="z-50 mb-3" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent
         justify="start"
-        className="data-[justify=start]:flex-grow-0 basis-8"
+        className="basis-8 data-[justify=start]:flex-grow-0"
       >
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
