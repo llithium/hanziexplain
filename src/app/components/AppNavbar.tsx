@@ -35,9 +35,6 @@ export default function AppNavbar() {
           className="sm:hidden"
         />
       </NavbarContent>
-      <NavbarContent justify="start">
-        <SearchInput />
-      </NavbarContent>
       <NavbarContent className="hidden gap-4 sm:flex" justify="center">
         <NavbarItem isActive={pathname === "/"}>
           <Link
@@ -48,11 +45,11 @@ export default function AppNavbar() {
             Home
           </Link>
         </NavbarItem>
-        <Dropdown>
+        {/* <Dropdown>
           <NavbarItem isActive={pathname.startsWith("/default")}>
             <DropdownTrigger>
               <Button
-                className={`flex items-center px-0 pl-2  text-medium text-foreground transition-opacity hover:opacity-80 active:opacity-disabled ${
+                className={`flex items-center px-0 pl-2 text-medium text-foreground transition-opacity hover:opacity-80 active:opacity-disabled ${
                   pathname.startsWith("/default") && "font-semibold"
                 }`}
                 variant="light"
@@ -87,13 +84,13 @@ export default function AppNavbar() {
               Default
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> */}
       </NavbarContent>
-      <NavbarContent
-        justify="end"
-        className="data-[justify=end]:flex-grow-0 sm:data-[justify=end]:flex-grow"
-      >
-        <NavbarItem>
+      <NavbarContent justify="start">
+        <SearchInput />
+      </NavbarContent>
+      <NavbarContent justify="end" className="data-[justify=end]:flex-grow-0">
+        {/* <NavbarItem>
           <Link
             className="transition-opacity hover:opacity-80 active:opacity-disabled"
             color="foreground"
@@ -106,7 +103,7 @@ export default function AppNavbar() {
           <Button as={Link} color="primary" href="/signup" variant="shadow">
             Sign Up
           </Button>
-        </NavbarItem>
+        </NavbarItem> */}
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
@@ -121,7 +118,7 @@ export default function AppNavbar() {
             Home
           </Link>
         </NavbarMenuItem>
-        <Dropdown>
+        {/* <Dropdown>
           <NavbarMenuItem isActive={pathname.startsWith("/default")}>
             <DropdownTrigger>
               <Button
@@ -162,7 +159,7 @@ export default function AppNavbar() {
               Default
             </DropdownItem>
           </DropdownMenu>
-        </Dropdown>
+        </Dropdown> */}
       </NavbarMenu>
     </Navbar>
   );

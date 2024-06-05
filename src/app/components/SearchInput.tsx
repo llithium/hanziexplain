@@ -12,6 +12,7 @@ const SearchInput = () => {
   useEffect(() => {
     rendered && router.push(`/search?q=${debouncedSearchTerm}`);
     setRendered(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchTerm, router]);
   return (
     <Input

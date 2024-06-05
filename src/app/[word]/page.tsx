@@ -18,12 +18,11 @@ export default function Page({ params }: { params: { word: string } }) {
   console.log(entries);
 
   return (
-    <div className="px-2">
+    <div className="mx-auto w-11/12 md:w-10/12">
       <div className="flex h-[150px] w-full items-end gap-2 font-hans">
-        <div className="flex items-end  gap-2 ">
-          <span className="text-5xl"> {entries[0].simp}</span>
-          <span className="font-sans text-2xl"> {entries[0].pinyin}</span>
+        <div className="flex items-end gap-2">
           <StrokeDiagram entries={entries} />
+          <span className="font-sans text-2xl"> {entries[0].pinyin}</span>
         </div>
       </div>
       <div className="pt-5">
@@ -33,7 +32,9 @@ export default function Page({ params }: { params: { word: string } }) {
             return (
               <div className="flex flex-col" key={i}>
                 <div>
-                  <span className="text-xl">{entry.pinyin}</span>
+                  <span> {entry.simp}</span>
+                  {entry.simp !== entry.trad && <span> {entry.trad}</span>}
+                  <span className="pl-2">{entry.pinyin}</span>
                   <div>
                     {entry.definitions.map((definition, index) => {
                       return (
