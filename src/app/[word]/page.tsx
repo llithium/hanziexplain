@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import StrokeDiagram from "@/app/components/StrokeDiagram";
 import { Image } from "@nextui-org/image";
 import capitalize from "@/app/utils/capitalize";
+import Link from "next/link";
 export async function generateMetadata({
   params,
 }: {
@@ -82,7 +83,12 @@ export default function Page({ params }: { params: { word: string } }) {
             return (
               <div key={i}>
                 <div className="flex items-end gap-2">
-                  <span className="text-lg">{Component.char}</span>
+                  <Link
+                    className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                    href={`/${Component.char}`}
+                  >
+                    <span className="text-lg">{Component.char}</span>
+                  </Link>
                   <span>{Component.pinyin}</span>
                 </div>
                 <div className="flex flex-col">
