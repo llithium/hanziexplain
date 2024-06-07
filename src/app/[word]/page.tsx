@@ -1,9 +1,10 @@
-import { getEntries, getEtymology } from "chinese-lexicon";
+import { Entry, getEntries } from "chinese-lexicon";
 import { Metadata } from "next";
 import StrokeDiagram from "@/app/components/StrokeDiagram";
 import { Image } from "@nextui-org/image";
 import capitalize from "@/app/utils/capitalize";
 import Link from "next/link";
+import getURL from "../utils/getURL";
 export async function generateMetadata({
   params,
 }: {
@@ -13,9 +14,10 @@ export async function generateMetadata({
   return { title: `${word} · Hanzi Explain` };
 }
 
-export default function Page({ params }: { params: { word: string } }) {
-  const word = decodeURIComponent(params.word);
-  const entries = getEntries(word);
+export default async function Page({ params }: { params: { word: string } }) {
+  const res = await fetch(getURL() + "api/word?q=" + params.word);
+  const entries = (await res.json()) as Entry[];
+
   console.log(entries);
 
   return (
