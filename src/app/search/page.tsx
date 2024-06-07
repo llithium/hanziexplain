@@ -1,5 +1,5 @@
 import { Divider } from "@nextui-org/divider";
-import { SearchResult, search } from "chinese-lexicon";
+import { SearchResult } from "chinese-lexicon";
 import { Metadata } from "next";
 import Link from "next/link";
 import getURL from "../utils/getURL";

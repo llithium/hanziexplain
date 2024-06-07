@@ -1,5 +1,5 @@
 import { search } from "chinese-lexicon";
-export const maxDuration = 30; // This function can run for a maximum of 5 seconds
+export const maxDuration = 30;
 
 export function GET(request: Request) {
   const { searchParams } = new URL(request.url);
