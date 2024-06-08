@@ -15,7 +15,7 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: { params: { word: string } }) {
-  const res = await fetch(getURL() + "api/word?q=" + params.word);
+  const res = await fetch(getURL() + "api/entries?q=" + params.word);
   const entries = (await res.json()) as Entry[];
 
   console.log(entries);
