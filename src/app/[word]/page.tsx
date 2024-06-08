@@ -16,6 +16,10 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: { word: string } }) {
   const res = await fetch(getURL() + "api/entries?q=" + params.word);
+  if (!res.ok) {
+    throw new Error(`Error:${res.status}, ${res.statusText}`);
+  }
+
   const entries = (await res.json()) as Entry[];
 
   console.log(entries);

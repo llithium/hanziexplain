@@ -21,8 +21,16 @@ export default async function Search({
 }: {
   searchParams: { q: string };
 }) {
-  const res = await fetch(getURL() + "api/search?q=" + searchParams.q);
-  const searchResults = (await res.json()) as SearchResult[];
+  const res =
+    searchParams.q !== ""
+      ? await fetch(getURL() + "api/search?q=" + searchParams.q)
+      : null;
+  if (res && !res.ok) {
+    throw new Error(`Error:${res.status}, ${res.statusText}`);
+  }
+
+  const searchResults =
+    res !== null ? ((await res.json()) as SearchResult[]) : [];
 
   return (
     <div className="px-2">
