@@ -193,22 +193,6 @@ export default async function Page({ params }: { params: { word: string } }) {
                 </div>
               </>
             ) : null}
-            {/* <h4>As Unknown Component:</h4>
-            <div className="flex w-full flex-wrap gap-1 font-hans">
-              {entries[0].usedAsComponentIn.simp.unknown?.map(
-                (component, i) => {
-                  return (
-                    <Link
-                      key={i + component}
-                      className="transition-opacity hover:opacity-80 active:opacity-disabled"
-                      href={`/${component}`}
-                    >
-                      <span>{component}</span>
-                    </Link>
-                  );
-                },
-              )}
-            </div> */}
           </div>
           <h3 className="pb-3 text-xl font-semibold">
             {entries[0].usedAsComponentIn.trad.count} Traditional Characters
@@ -277,22 +261,6 @@ export default async function Page({ params }: { params: { word: string } }) {
                 </div>
               </>
             ) : null}
-            {/* <h4>As Unknown Component:</h4>
-            <div className="flex w-full flex-wrap gap-1 font-hans">
-              {entries[0].usedAsComponentIn.trad.unknown?.map(
-                (component, i) => {
-                  return (
-                    <Link
-                      key={i + component}
-                      className="transition-opacity hover:opacity-80 active:opacity-disabled"
-                      href={`/${component}`}
-                    >
-                      <span>{component}</span>
-                    </Link>
-                  );
-                },
-              )}
-            </div> */}
           </div>
         </div>
       )}
