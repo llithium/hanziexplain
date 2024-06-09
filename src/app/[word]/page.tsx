@@ -13,13 +13,13 @@ export async function generateMetadata({
   const word = decodeURIComponent(params.word);
   return { title: `${word} · Hanzi Explain` };
 }
+export const maxDuration = 30;
 
 export default async function Page({ params }: { params: { word: string } }) {
   const res = await fetch(getURL() + "api/entries?q=" + params.word);
   if (!res.ok) {
     throw new Error(`Error:${res.status}, ${res.statusText}`);
   }
-
   const entries = (await res.json()) as Entry[];
 
   console.log(entries);
@@ -29,7 +29,13 @@ export default async function Page({ params }: { params: { word: string } }) {
       <div className="flex h-[150px] w-full items-end gap-2 font-hans">
         <div className="flex items-end gap-2">
           <StrokeDiagram entries={entries} />
-          <span className="font-sans text-2xl"> {entries[0].pinyin}</span>
+
+          {entries.map((entry, index) => (
+            <span key={entry.boost + index} className="font-sans text-2xl">
+              {entry.pinyin}
+              {index !== entries.length - 1 && ", "}
+            </span>
+          ))}
         </div>
       </div>
       <div className="pt-5">
@@ -82,28 +88,35 @@ export default async function Page({ params }: { params: { word: string } }) {
       </div>
       <div>
         {entries[0].simpEtymology?.components.length > 0 && (
-          <h2 className="pt-5 text-2xl font-semibold">Components</h2>
+          <>
+            {" "}
+            <h2 className="pt-5 text-2xl font-semibold">Components</h2>
+            <div className="flex flex-col gap-2">
+              {entries[0].simpEtymology?.components &&
+                entries[0].simpEtymology?.components.map((Component, i) => {
+                  return (
+                    <div key={i}>
+                      <div className="flex items-end gap-2">
+                        <Link
+                          className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                          href={`/${Component.char}`}
+                        >
+                          <span className="text-lg">{Component.char}</span>
+                        </Link>
+                        <span>{Component.pinyin}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span>Type: {capitalize(Component.type)}</span>
+                        <span>
+                          Definition: {capitalize(Component.definition)}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </>
         )}
-        {entries[0].simpEtymology?.components &&
-          entries[0].simpEtymology?.components.map((Component, i) => {
-            return (
-              <div key={i}>
-                <div className="flex items-end gap-2">
-                  <Link
-                    className="transition-opacity hover:opacity-80 active:opacity-disabled"
-                    href={`/${Component.char}`}
-                  >
-                    <span className="text-lg">{Component.char}</span>
-                  </Link>
-                  <span>{Component.pinyin}</span>
-                </div>
-                <div className="flex flex-col">
-                  <span>Type: {capitalize(Component.type)}</span>
-                  <span>Definition: {capitalize(Component.definition)}</span>
-                </div>
-              </div>
-            );
-          })}
       </div>
       {entries[0].usedAsComponentIn.simp.count == 0 &&
       entries[0].usedAsComponentIn.trad.count == 0 ? null : (
@@ -268,6 +281,50 @@ export default async function Page({ params }: { params: { word: string } }) {
           </div>
         </div>
       )}
+      <div>
+        <h2 className="pt-5 text-2xl font-semibold">Statistics</h2>
+        <h3 className="pb-3 text-xl font-semibold">
+          HSK: {entries[0].statistics.hskLevel}
+        </h3>
+        {entries[0].statistics.topWords && (
+          <>
+            <h4 className="text-xl font-semibold">
+              Words containing {entries[0].simp} (by frequency)
+            </h4>
+            <div className="flex flex-col gap-1">
+              {entries[0].statistics.topWords
+                ?.sort((a, b) => b.share - a.share)
+                .map((word, i) => {
+                  return (
+                    <div key={word.share}>
+                      {/* <span>{word.share}</span> */}
+                      {/* <span className="flex items-end text-sm opacity-70">
+                        {i + 1}.
+                      </span> */}
+                      <div className="flex gap-2 font-hans">
+                        <Link
+                          className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                          href={`/${word.word}`}
+                        >
+                          <span className="text-lg">{word.word}</span>
+                        </Link>
+                        {word.word !== word.trad && (
+                          <Link
+                            className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                            href={`/${word.trad}`}
+                          >
+                            <span className="text-lg">{word.trad}</span>
+                          </Link>
+                        )}
+                      </div>
+                      <span>{capitalize(word.gloss)}</span>
+                    </div>
+                  );
+                })}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

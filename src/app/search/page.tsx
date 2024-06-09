@@ -15,6 +15,7 @@ export async function generateMetadata({
     title: `${search} · Hanzi Explain`,
   };
 }
+export const maxDuration = 30;
 
 export default async function Search({
   searchParams,
