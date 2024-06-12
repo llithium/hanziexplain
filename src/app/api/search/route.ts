@@ -7,14 +7,17 @@ export function GET(request: Request) {
   const limitString = searchParams.get("limit");
   if (limitString && term) {
     const limit = parseInt(limitString);
-    const SearchResults = search(term, limit);
-    return Response.json(SearchResults);
+    const searchResults = search(term, limit);
+    return Response.json(searchResults);
   }
   if (term) {
-    const SearchResults = search(term);
-    return Response.json(SearchResults);
+    const searchResults = search(term);
+    return Response.json(searchResults);
   }
-  return new Response("No search term provided", {
-    status: 400,
-  });
+  return Response.json(
+    { message: "No search term provided" },
+    {
+      status: 400,
+    },
+  );
 }

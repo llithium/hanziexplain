@@ -4,7 +4,7 @@ import StrokeDiagram from "@/app/components/StrokeDiagram";
 import { Image } from "@nextui-org/image";
 import capitalize from "@/app/utils/capitalize";
 import Link from "next/link";
-import getURL from "../utils/getURL";
+import getURL from "@/app/utils/getURL";
 export async function generateMetadata({
   params,
 }: {
@@ -16,7 +16,7 @@ export async function generateMetadata({
 export const maxDuration = 30;
 
 export default async function Page({ params }: { params: { word: string } }) {
-  const res = await fetch(getURL() + "api/entries?q=" + params.word);
+  const res = await fetch(getURL() + "api/entries/" + params.word);
   if (!res.ok) {
     throw new Error(`Error:${res.status}, ${res.statusText}`);
   }
@@ -89,7 +89,6 @@ export default async function Page({ params }: { params: { word: string } }) {
       <div>
         {entries[0].simpEtymology?.components.length > 0 && (
           <>
-            {" "}
             <h2 className="pt-5 text-2xl font-semibold">Components</h2>
             <div className="flex flex-col gap-2">
               {entries[0].simpEtymology?.components &&
@@ -289,7 +288,9 @@ export default async function Page({ params }: { params: { word: string } }) {
         {entries[0].statistics.topWords && (
           <>
             <h4 className="text-xl font-semibold">
-              Words containing {entries[0].simp} (by frequency)
+              Words containing{" "}
+              <span className="font-hans">{entries[0].simp}</span> (by
+              frequency)
             </h4>
             <div className="flex flex-col gap-1">
               {entries[0].statistics.topWords

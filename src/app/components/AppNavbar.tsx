@@ -18,7 +18,7 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import SearchInput from "@/app/components/SearchInput";
-import ThemeSwitcher from "./ThemeSwitcher";
+import ThemeSwitcher from "@/app/components/ThemeSwitcher";
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

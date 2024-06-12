@@ -2,7 +2,7 @@ import { Divider } from "@nextui-org/divider";
 import { SearchResult } from "chinese-lexicon";
 import { Metadata } from "next";
 import Link from "next/link";
-import getURL from "../utils/getURL";
+import getURL from "@/app/utils/getURL";
 
 export async function generateMetadata({
   searchParams,
@@ -35,7 +35,7 @@ export default async function Search({
 
   return (
     <div className="px-2">
-      {searchResults &&
+      {searchResults.length > 0 || searchParams.q == "" ? (
         searchResults.map((result) => {
           return (
             <div
@@ -65,7 +65,17 @@ export default async function Search({
               <Divider className="my-2" />
             </div>
           );
-        })}
+        })
+      ) : (
+        <div className="col-span-2 mt-auto flex w-full flex-row justify-center">
+          <h2 className="text-2xl">
+            No results found for{" "}
+            <span className="font-semibold tracking-wider">
+              {searchParams.q}
+            </span>
+          </h2>
+        </div>
+      )}
     </div>
   );
 }
