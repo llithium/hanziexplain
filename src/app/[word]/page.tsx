@@ -26,19 +26,19 @@ export default async function Page({ params }: { params: { word: string } }) {
 
   return (
     <div className="mx-auto w-11/12 pb-6 md:w-10/12">
-      <div className="flex h-[150px] w-full items-end gap-2 font-hans">
+      <div className="flex h-fit w-full items-end gap-2 font-hans">
         <div className="flex items-end gap-2">
           <StrokeDiagram entries={entries} />
 
           {entries.map((entry, index) => (
-            <span key={entry.boost + index} className="font-sans text-2xl">
+            <span key={entry.boost + index} className="pb-7 font-sans text-2xl">
               {entry.pinyin}
               {index !== entries.length - 1 && ", "}
             </span>
           ))}
         </div>
       </div>
-      <div className="pt-5">
+      <div>
         <h2 className="text-2xl font-semibold">Definition</h2>
         <div className="flex flex-col gap-3 text-lg">
           {entries.map((entry, i) => {
