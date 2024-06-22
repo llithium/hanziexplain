@@ -89,42 +89,44 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
           })}
         </div>
       </div>
-      <div className="flex w-full justify-center gap-2 py-1 *:bg-opacity-50">
-        <Button
-          className="embla__prev h-6 w-6 min-w-6 rounded-full"
-          isIconOnly
-          onClick={scrollPrev}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.5em"
-            height="1.5em"
-            viewBox="0 0 24 24"
+      {simpCharsArray.length > 1 ? (
+        <div className="flex w-full justify-center gap-2 py-1 *:bg-opacity-50">
+          <Button
+            className="embla__prev h-6 w-6 min-w-6 rounded-full"
+            isIconOnly
+            onClick={scrollPrev}
           >
-            <path
-              fill="currentColor"
-              d="M14.91 6.71a.996.996 0 0 0-1.41 0L8.91 11.3a.996.996 0 0 0 0 1.41l4.59 4.59a.996.996 0 1 0 1.41-1.41L11.03 12l3.88-3.88c.38-.39.38-1.03 0-1.41"
-            ></path>
-          </svg>
-        </Button>
-        <Button
-          className="embla__next h-6 w-6 min-w-6 rounded-full"
-          isIconOnly
-          onClick={scrollNext}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1.5em"
-            height="1.5em"
-            viewBox="0 0 24 24"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.5em"
+              height="1.5em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M14.91 6.71a.996.996 0 0 0-1.41 0L8.91 11.3a.996.996 0 0 0 0 1.41l4.59 4.59a.996.996 0 1 0 1.41-1.41L11.03 12l3.88-3.88c.38-.39.38-1.03 0-1.41"
+              ></path>
+            </svg>
+          </Button>
+          <Button
+            className="embla__next h-6 w-6 min-w-6 rounded-full"
+            isIconOnly
+            onClick={scrollNext}
           >
-            <path
-              fill="currentColor"
-              d="M9.31 6.71a.996.996 0 0 0 0 1.41L13.19 12l-3.88 3.88a.996.996 0 1 0 1.41 1.41l4.59-4.59a.996.996 0 0 0 0-1.41L10.72 6.7c-.38-.38-1.02-.38-1.41.01"
-            ></path>
-          </svg>
-        </Button>
-      </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.5em"
+              height="1.5em"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="currentColor"
+                d="M9.31 6.71a.996.996 0 0 0 0 1.41L13.19 12l-3.88 3.88a.996.996 0 1 0 1.41 1.41l4.59-4.59a.996.996 0 0 0 0-1.41L10.72 6.7c-.38-.38-1.02-.38-1.41.01"
+              ></path>
+            </svg>
+          </Button>
+        </div>
+      ) : null}
     </div>
   );
 };

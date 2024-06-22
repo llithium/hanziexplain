@@ -45,8 +45,29 @@ export default async function Page({ params }: { params: { word: string } }) {
             return (
               <div className="flex flex-col" key={i}>
                 <div>
-                  <span> {entry.simp}</span>
-                  {entry.simp !== entry.trad && <span> {entry.trad}</span>}
+                  {Array.from(entry.simp).map((char, i) => {
+                    return (
+                      <Link
+                        key={char + i}
+                        href={char}
+                        className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                      >
+                        <span>{char}</span>
+                      </Link>
+                    );
+                  })}{" "}
+                  {entry.simp !== entry.trad &&
+                    Array.from(entry.trad).map((char, i) => {
+                      return (
+                        <Link
+                          key={char + i}
+                          href={char}
+                          className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                        >
+                          <span>{char}</span>
+                        </Link>
+                      );
+                    })}
                   <span className="pl-2">{entry.pinyin}</span>
                   <div>
                     {entry.definitions.map((definition, index) => {
