@@ -2,12 +2,14 @@
 import { Entry } from "chinese-lexicon";
 import HanziWriter from "hanzi-writer";
 import { useTheme } from "next-themes";
-import { useCallback, useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Button } from "@nextui-org/button";
+import { TraditionalContext } from "./traditional-provider";
 
 const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
   const { theme } = useTheme();
+  const { tradSelected } = useContext(TraditionalContext);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const scrollPrev = useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -16,21 +18,51 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
   const simpCharsArray = Array.from(entries[0].simp);
-  // const tradCharsArray = Array.from(entries[0].trad);
+  const tradCharsArray = Array.from(entries[0].trad);
+  const [writers, setWriters] = useState<HanziWriter[]>([]);
+  useEffect(() => {
+    if (tradSelected) {
+      tradCharsArray.forEach((char, i) => {
+        const writer = HanziWriter.create(`stroke-diagram-${i}`, char, {
+          width: 150,
+          height: 150,
+          padding: 5,
+          outlineColor: theme === "light" ? "#DDD" : "#3c3c3c",
+          strokeColor: theme === "light" ? "#11181c" : "#ecedee",
+          delayBetweenStrokes: 190, //
+        });
+        writer.loopCharacterAnimation();
+        writer && setWriters((prevWriters) => [...prevWriters, writer]);
+      });
+    } else {
+      simpCharsArray.forEach((char, i) => {
+        const writer = HanziWriter.create(`stroke-diagram-${i}`, char, {
+          width: 150,
+          height: 150,
+          padding: 5,
+          outlineColor: theme === "light" ? "#DDD" : "#3c3c3c",
+          strokeColor: theme === "light" ? "#11181c" : "#ecedee",
+          delayBetweenStrokes: 190, //
+        });
+        writer.loopCharacterAnimation();
+        writer && setWriters((prevWriters) => [...prevWriters, writer]);
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    simpCharsArray.map((char, i) => {
-      HanziWriter.create(`stroke-diagram-${i}`, char, {
-        width: 150,
-        height: 150,
-        padding: 5,
-        outlineColor: theme === "light" ? "#DDD" : "#3c3c3c",
-        strokeColor: theme === "light" ? "#11181c" : "#ecedee",
-        delayBetweenStrokes: 190, //
-      }).loopCharacterAnimation();
-    });
-  }, [entries, theme, simpCharsArray]);
-
+    if (tradSelected) {
+      writers.forEach((element, i) => {
+        element.setCharacter(tradCharsArray[i]);
+        element.loopCharacterAnimation();
+      });
+    } else {
+      writers.forEach((element, i) => {
+        element.setCharacter(simpCharsArray[i]);
+        element.loopCharacterAnimation();
+      });
+    }
+  }, [tradSelected]);
   return (
     <div className="embla w-[150px] overflow-hidden">
       <div className="embla__viewport" ref={emblaRef}>

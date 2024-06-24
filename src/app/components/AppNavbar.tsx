@@ -13,12 +13,12 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "@nextui-org/dropdown";
-import { Button } from "@nextui-org/button";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import SearchInput from "@/app/components/SearchInput";
 import ThemeSwitcher from "@/app/components/ThemeSwitcher";
+import TraditionalSwitcher from "./TraditionalSwitcher";
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -104,6 +104,9 @@ export default function AppNavbar() {
             Sign Up
           </Button>
         </NavbarItem> */}
+        <NavbarItem>
+          <TraditionalSwitcher />
+        </NavbarItem>
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
