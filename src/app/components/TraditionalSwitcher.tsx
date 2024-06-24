@@ -1,3 +1,4 @@
+"use client";
 import { Switch } from "@nextui-org/switch";
 import { useContext } from "react";
 import { TraditionalContext } from "./traditional-provider";
@@ -12,6 +13,7 @@ const TraditionalSwitcher = () => {
         className="m-0 font-hans"
         size="sm"
         color="default"
+        isSelected={tradSelected}
         onValueChange={(v) => setTradSelected(!tradSelected)}
       ></Switch>
       <span className="font-hans">繁</span>

@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useLocalStorage } from "@uidotdev/usehooks";
 
 interface TraditionalContextType {
   tradSelected: boolean;
@@ -18,6 +20,21 @@ export default function TraditionalProvider({
   children: React.ReactNode;
 }) {
   const [tradSelected, setTradSelected] = useState(false);
+  if (typeof window !== "undefined") {
+    const [tradSelectedLocalStorage, saveTradSelectedLocalStorage] =
+      useLocalStorage("tradSelected", false);
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        setTradSelected(tradSelectedLocalStorage);
+      }
+    }, []);
+
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        saveTradSelectedLocalStorage(tradSelected);
+      }
+    }, [tradSelected]);
+  }
   return (
     <TraditionalContext.Provider value={{ tradSelected, setTradSelected }}>
       {children}
