@@ -1,8 +1,13 @@
+"use client";
+import { TraditionalContext } from "@/app/components/traditional-provider";
 import capitalize from "@/app/utils/capitalize";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
+import { useContext } from "react";
 
 const Statistics = ({ entries }: { entries: Entry[] }) => {
+  const { tradSelected } = useContext(TraditionalContext);
+
   return (
     <>
       <div>
@@ -14,8 +19,10 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
           <>
             <h4 className="text-xl font-semibold">
               Words containing{" "}
-              <span className="font-hans">{entries[0].simp}</span> (by
-              frequency)
+              <span className="font-hans">
+                {tradSelected ? entries[0].trad : entries[0].simp}
+              </span>{" "}
+              (by frequency)
             </h4>
             <div className="flex flex-col gap-1">
               {entries[0].statistics.topWords

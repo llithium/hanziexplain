@@ -2,7 +2,6 @@
 "use client";
 
 import { createContext, useEffect, useState } from "react";
-import { useLocalStorage } from "@uidotdev/usehooks";
 
 interface TraditionalContextType {
   tradSelected: boolean;
@@ -21,19 +20,15 @@ export default function TraditionalProvider({
 }) {
   const [tradSelected, setTradSelected] = useState(false);
   if (typeof window !== "undefined") {
-    const [tradSelectedLocalStorage, saveTradSelectedLocalStorage] =
-      useLocalStorage("tradSelected", false);
-    useEffect(() => {
-      if (typeof window !== "undefined") {
-        setTradSelected(tradSelectedLocalStorage);
-      }
-    }, []);
+    const tradSelectedLocalStorage = localStorage.getItem("tradSelected");
 
     useEffect(() => {
-      if (typeof window !== "undefined") {
-        saveTradSelectedLocalStorage(tradSelected);
+      if (tradSelectedLocalStorage === "true") {
+        setTradSelected(true);
+      } else if (tradSelectedLocalStorage === "false") {
+        setTradSelected(false);
       }
-    }, [tradSelected]);
+    }, []);
   }
   return (
     <TraditionalContext.Provider value={{ tradSelected, setTradSelected }}>

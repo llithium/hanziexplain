@@ -20,6 +20,7 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
   const simpCharsArray = Array.from(entries[0].simp);
   const tradCharsArray = Array.from(entries[0].trad);
   const [writers, setWriters] = useState<HanziWriter[]>([]);
+
   useEffect(() => {
     if (tradSelected) {
       tradCharsArray.forEach((char, i) => {
@@ -63,6 +64,7 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
       });
     }
   }, [tradSelected]);
+
   return (
     <div className="embla w-[150px] overflow-hidden">
       <div className="embla__viewport" ref={emblaRef}>

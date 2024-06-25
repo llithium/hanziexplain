@@ -5,7 +5,10 @@ import { TraditionalContext } from "./traditional-provider";
 
 const TraditionalSwitcher = () => {
   const { tradSelected, setTradSelected } = useContext(TraditionalContext);
-
+  function handleValueChange(value: boolean) {
+    setTradSelected(!tradSelected);
+    localStorage.setItem("tradSelected", value.toString());
+  }
   return (
     <>
       <span className="font-hans">简</span>{" "}
@@ -14,7 +17,7 @@ const TraditionalSwitcher = () => {
         size="sm"
         color="default"
         isSelected={tradSelected}
-        onValueChange={(v) => setTradSelected(!tradSelected)}
+        onValueChange={handleValueChange}
       ></Switch>
       <span className="font-hans">繁</span>
     </>
