@@ -35,13 +35,31 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
                         {i + 1}.
                       </span> */}
                       <div className="flex gap-2 font-hans">
-                        <Link
-                          className="transition-opacity hover:opacity-80 active:opacity-disabled"
-                          href={`/${word.word}`}
-                        >
-                          <span className="text-lg">{word.word}</span>
-                        </Link>
-                        {word.word !== word.trad && (
+                        {tradSelected ? (
+                          <Link
+                            className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                            href={`/${word.trad}`}
+                          >
+                            <span className="text-lg">{word.trad}</span>
+                          </Link>
+                        ) : (
+                          <Link
+                            className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                            href={`/${word.word}`}
+                          >
+                            <span className="text-lg">{word.word}</span>
+                          </Link>
+                        )}
+
+                        {tradSelected && word.word !== word.trad && (
+                          <Link
+                            className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                            href={`/${word.word}`}
+                          >
+                            <span className="text-lg">{word.word}</span>
+                          </Link>
+                        )}
+                        {!tradSelected && word.word !== word.trad && (
                           <Link
                             className="transition-opacity hover:opacity-80 active:opacity-disabled"
                             href={`/${word.trad}`}

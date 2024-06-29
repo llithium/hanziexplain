@@ -3,6 +3,7 @@ import { SearchResult } from "chinese-lexicon";
 import { Metadata } from "next";
 import Link from "next/link";
 import getURL from "@/app/utils/getURL";
+import Characters from "./components/Characters";
 
 export async function generateMetadata({
   searchParams,
@@ -47,10 +48,7 @@ export default async function Search({
                 href={`/${result.simp}`}
               >
                 <div className="flex items-end gap-2">
-                  <span className="text-2xl"> {result.simp}</span>
-                  {result.simp !== result.trad && (
-                    <span className="text-2xl"> {result.trad}</span>
-                  )}
+                  <Characters result={result} />
                   <span>{result.pinyin}</span>
                 </div>
                 {result.definitions.map((definition, i) => {
