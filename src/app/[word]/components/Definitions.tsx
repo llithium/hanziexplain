@@ -1,6 +1,7 @@
 import capitalize from "@/app/utils/capitalize";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
+import DefinitionCharacters from "./DefinitionCharacters";
 
 const Definitions = ({ entries }: { entries: Entry[] }) => {
   return (
@@ -12,29 +13,7 @@ const Definitions = ({ entries }: { entries: Entry[] }) => {
             return (
               <div className="flex flex-col" key={i}>
                 <div>
-                  {Array.from(entry.simp).map((char, i) => {
-                    return (
-                      <Link
-                        key={char + i}
-                        href={char}
-                        className="transition-opacity hover:opacity-80 active:opacity-disabled"
-                      >
-                        <span>{char}</span>
-                      </Link>
-                    );
-                  })}{" "}
-                  {entry.simp !== entry.trad &&
-                    Array.from(entry.trad).map((char, i) => {
-                      return (
-                        <Link
-                          key={char + i}
-                          href={char}
-                          className="transition-opacity hover:opacity-80 active:opacity-disabled"
-                        >
-                          <span>{char}</span>
-                        </Link>
-                      );
-                    })}
+                  <DefinitionCharacters entry={entry} />
                   <span className="pl-2">{entry.pinyin}</span>
                   <div>
                     {entry.definitions.map((definition, index) => {
