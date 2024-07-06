@@ -5,7 +5,6 @@ export function GET(
   request: Request,
   { params }: { params: { word: string } },
 ) {
-  console.log(params.word);
 
   const URIword = params.word;
   if (URIword) {
