@@ -2,8 +2,8 @@ import { Divider } from "@nextui-org/divider";
 import { SearchResult } from "chinese-lexicon";
 import { Metadata } from "next";
 import Link from "next/link";
-import getURL from "@/app/utils/getURL";
 import Characters from "./components/Characters";
+import getAPIURL from "../utils/getAPIURL";
 
 export async function generateMetadata({
   searchParams,
@@ -25,7 +25,7 @@ export default async function Search({
 }) {
   const res =
     searchParams.q !== ""
-      ? await fetch(getURL() + "api/search?q=" + searchParams.q)
+      ? await fetch(getAPIURL() + "search?q=" + searchParams.q)
       : null;
   if (res && !res.ok) {
     throw new Error(`Error:${res.status}, ${res.statusText}`);

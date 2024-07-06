@@ -1,12 +1,12 @@
 import { Entry } from "chinese-lexicon";
 import { Metadata } from "next";
 import StrokeDiagram from "@/app/components/StrokeDiagram";
-import getURL from "@/app/utils/getURL";
 import Etymology from "./components/Etymology";
 import Components from "./components/Components";
 import Statistics from "./components/Statistics";
 import UsedAsComponentIn from "./components/UsedAsCompnentIn";
 import Definitions from "./components/Definitions";
+import getAPIURL from "../utils/getAPIURL";
 
 export async function generateMetadata({
   params,
@@ -19,7 +19,7 @@ export async function generateMetadata({
 export const maxDuration = 30;
 
 export default async function Page({ params }: { params: { word: string } }) {
-  const res = await fetch(getURL() + "api/entries/" + params.word);
+  const res = await fetch(getAPIURL() + "entries/" + params.word);
   if (!res.ok) {
     throw new Error(`Error:${res.status}, ${res.statusText}`);
   }
