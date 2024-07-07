@@ -8,8 +8,9 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
   const { tradSelected } = useContext(TraditionalContext);
   return (
     <div className="inline-flex gap-2">
-      {tradSelected
-        ? Array.from(entry.trad).map((char, i) => {
+      <div>
+        {tradSelected
+          ? Array.from(entry.trad).map((char, i) => {
             return (
               <Link
                 key={char + i}
@@ -20,7 +21,7 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
               </Link>
             );
           })
-        : Array.from(entry.simp).map((char, i) => {
+          : Array.from(entry.simp).map((char, i) => {
             return (
               <Link
                 key={char + i}
@@ -31,32 +32,35 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
               </Link>
             );
           })}
-      {tradSelected &&
-        entry.simp !== entry.trad &&
-        Array.from(entry.simp).map((char, i) => {
-          return (
-            <Link
-              key={char + i}
-              href={char}
-              className="transition-opacity hover:opacity-80 active:opacity-disabled"
-            >
-              <span>{char}</span>
-            </Link>
-          );
-        })}
-      {!tradSelected &&
-        entry.simp !== entry.trad &&
-        Array.from(entry.trad).map((char, i) => {
-          return (
-            <Link
-              key={char + i}
-              href={char}
-              className="transition-opacity hover:opacity-80 active:opacity-disabled"
-            >
-              <span>{char}</span>
-            </Link>
-          );
-        })}
+      </div>
+      <div>
+        {tradSelected &&
+          entry.simp !== entry.trad &&
+          Array.from(entry.simp).map((char, i) => {
+            return (
+              <Link
+                key={char + i}
+                href={char}
+                className="transition-opacity hover:opacity-80 active:opacity-disabled"
+              >
+                <span>{char}</span>
+              </Link>
+            );
+          })}
+        {!tradSelected &&
+          entry.simp !== entry.trad &&
+          Array.from(entry.trad).map((char, i) => {
+            return (
+              <Link
+                key={char + i}
+                href={char}
+                className="transition-opacity hover:opacity-80 active:opacity-disabled"
+              >
+                <span>{char}</span>
+              </Link>
+            );
+          })}
+      </div>
     </div>
   );
 };
