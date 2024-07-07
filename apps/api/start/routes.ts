@@ -1,4 +1,3 @@
-import { getEntries, search } from 'chinese-lexicon'
 /*
 |--------------------------------------------------------------------------
 | Routes file
@@ -9,28 +8,9 @@ import { getEntries, search } from 'chinese-lexicon'
 */
 
 import router from '@adonisjs/core/services/router'
+const SearchesController = () => import('#controllers/searches_controller')
+const EntriesController = () => import('#controllers/entries_controller')
 
-router.get('/search', async ({ response, request }) => {
-  const term = request.qs().q
-  const limitString = request.qs().q.limit
-  if (limitString && term) {
-    const limit = Number.parseInt(limitString)
-    const searchResults = search(term, limit)
-    return response.send(searchResults)
-  }
-  if (term) {
-    const searchResults = search(term)
-    return response.send(searchResults)
-  }
-  return response.status(400).send({ message: 'No search term provided' })
-})
+router.get('/search', [SearchesController, 'index'])
 
-router.get('/entries/:word', async ({ params, response }) => {
-  const URIword = params.word
-  if (URIword) {
-    const word = decodeURIComponent(URIword)
-    const entries = getEntries(word)
-    return response.send(entries)
-  }
-  return response.status(400).send({ message: 'No search term provided' })
-})
+router.get('/entries/:word', [EntriesController, 'index'])
