@@ -22,29 +22,31 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
   const [writers, setWriters] = useState<HanziWriter[]>([]);
 
   useEffect(() => {
+    const writerOptions = {
+      width: 150,
+      height: 150,
+      padding: 5,
+      outlineColor: theme === "light" ? "#DDD" : "#3c3c3c",
+      strokeColor: theme === "light" ? "#11181c" : "#ecedee",
+      delayBetweenStrokes: 190, //
+    };
     if (tradSelected) {
       tradCharsArray.forEach((char, i) => {
-        const writer = HanziWriter.create(`stroke-diagram-${i}`, char, {
-          width: 150,
-          height: 150,
-          padding: 5,
-          outlineColor: theme === "light" ? "#DDD" : "#3c3c3c",
-          strokeColor: theme === "light" ? "#11181c" : "#ecedee",
-          delayBetweenStrokes: 190, //
-        });
+        const writer = HanziWriter.create(
+          `stroke-diagram-${i}`,
+          char,
+          writerOptions,
+        );
         writer.loopCharacterAnimation();
         writer && setWriters((prevWriters) => [...prevWriters, writer]);
       });
     } else {
       simpCharsArray.forEach((char, i) => {
-        const writer = HanziWriter.create(`stroke-diagram-${i}`, char, {
-          width: 150,
-          height: 150,
-          padding: 5,
-          outlineColor: theme === "light" ? "#DDD" : "#3c3c3c",
-          strokeColor: theme === "light" ? "#11181c" : "#ecedee",
-          delayBetweenStrokes: 190, //
-        });
+        const writer = HanziWriter.create(
+          `stroke-diagram-${i}`,
+          char,
+          writerOptions,
+        );
         writer.loopCharacterAnimation();
         writer && setWriters((prevWriters) => [...prevWriters, writer]);
       });

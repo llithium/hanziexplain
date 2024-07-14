@@ -1,13 +1,53 @@
 "use client";
+import RecentlyViewed from "@/app/components/RecentlyViewed";
 import { TraditionalContext } from "@/app/components/traditional-provider";
 import capitalize from "@/app/utils/capitalize";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useContext } from "react";
 
 const Statistics = ({ entries }: { entries: Entry[] }) => {
   const { tradSelected } = useContext(TraditionalContext);
+  const pathname = decodeURI(usePathname());
 
+  if (typeof window !== "undefined") {
+    const recentlyViewed: RecentlyViewed[] = JSON.parse(
+      localStorage.getItem("recentlyViewed") || "[]",
+    );
+
+    if (!recentlyViewed.some((e) => e.path === pathname)) {
+      if (recentlyViewed.length >= 15) {
+        localStorage.setItem(
+          "recentlyViewed",
+
+          JSON.stringify([
+            ...recentlyViewed.slice(1, 5),
+            {
+              simp: entries[0].simp,
+              trad: entries[0].trad,
+              pinyin: entries[0].pinyin,
+              path: pathname,
+            },
+          ]),
+        );
+      } else {
+        localStorage.setItem(
+          "recentlyViewed",
+
+          JSON.stringify([
+            ...recentlyViewed,
+            {
+              simp: entries[0].simp,
+              trad: entries[0].trad,
+              pinyin: entries[0].pinyin,
+              path: pathname,
+            },
+          ]),
+        );
+      }
+    }
+  }
   return (
     <>
       <div>
