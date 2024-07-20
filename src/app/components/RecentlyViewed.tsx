@@ -16,7 +16,9 @@ const RecentlyViewed = () => {
   }, []);
   return (
     <div className="">
-      <h2 className="pt-5 text-2xl font-semibold">Recently Viewed</h2>
+      {recentlyViewed.length > 0 ? (
+        <h2 className="pt-5 text-2xl font-semibold">Recently Viewed</h2>
+      ) : null}
       <div className="flex flex-col">
         {recentlyViewed.map((e, i) => {
           return (
