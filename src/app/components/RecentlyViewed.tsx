@@ -14,16 +14,16 @@ const RecentlyViewed = () => {
       setRecentlyViewed(recentlyViewed);
     }
   }, []);
-  return (
-    <div className="">
-      {recentlyViewed.length > 0 ? (
-        <h2 className="pt-5 text-2xl font-semibold">Recently Viewed</h2>
-      ) : null}
-      <div className="flex flex-col">
-        {recentlyViewed.map((e, i) => {
+  return recentlyViewed.length > 0 ? (
+    <div className="w-5/6 md:w-fit md:basis-1/2">
+      <h2 className="py-2 text-center text-2xl font-semibold">
+        Recently Viewed
+      </h2>
+      <div className="flex h-[calc(100lvh-150px)] flex-col overflow-auto">
+        {recentlyViewed.reverse().map((e, i) => {
           return (
             <Link
-              className="transition-opacity *:font-hans *:text-xl hover:opacity-80 active:opacity-disabled"
+              className="transition-opacity *:font-hans *:text-3xl hover:opacity-80 active:opacity-disabled"
               key={i}
               href={e.path}
             >
@@ -33,7 +33,7 @@ const RecentlyViewed = () => {
         })}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default RecentlyViewed;

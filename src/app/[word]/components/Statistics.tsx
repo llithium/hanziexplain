@@ -15,14 +15,14 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
     const recentlyViewed: RecentlyViewed[] = JSON.parse(
       localStorage.getItem("recentlyViewed") || "[]",
     );
-
+    const recentlyViewedListSize = 20;
     if (!recentlyViewed.some((e) => e.path === pathname)) {
-      if (recentlyViewed.length >= 15) {
+      if (recentlyViewed.length >= recentlyViewedListSize) {
         localStorage.setItem(
           "recentlyViewed",
 
           JSON.stringify([
-            ...recentlyViewed.slice(1, 5),
+            ...recentlyViewed.slice(1, recentlyViewedListSize),
             {
               simp: entries[0].simp,
               trad: entries[0].trad,

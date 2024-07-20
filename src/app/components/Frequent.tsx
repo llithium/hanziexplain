@@ -691,15 +691,15 @@ const Frequent = () => {
     },
   ];
   return (
-    <div>
-      <h2 className="pt-5 text-2xl font-semibold">Most Frequent</h2>
-      <div className="flex h-[calc(100lvh-150px)] flex-col gap-1 overflow-auto">
+    <div className="w-5/6 md:w-fit md:basis-1/2">
+      <h2 className="py-2 text-center text-2xl font-semibold">Most Frequent</h2>
+      <div className="flex h-[calc(100lvh-150px)] flex-col overflow-auto pr-2">
         {mostFrequent100.slice(0, 30).map((word, i) => {
           return (
             <div key={i} className="flex gap-2">
-              <span className="w-6">{i + 1}.</span>
+              <span className="w-6 self-end">{i + 1}.</span>
               <Link
-                className="inline-block transition-opacity *:font-hans *:text-xl hover:opacity-80 active:opacity-disabled"
+                className="inline-block transition-opacity *:font-hans *:text-3xl hover:opacity-80 active:opacity-disabled"
                 href={`/${word.simp}`}
               >
                 {tradSelected ? (
