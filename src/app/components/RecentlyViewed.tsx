@@ -15,9 +15,9 @@ const RecentlyViewed = () => {
     }
   }, []);
   return recentlyViewed.length > 0 ? (
-    <div className="w-5/6 md:w-fit md:basis-1/2">
+    <div className="w-5/6 md:w-fit md:max-w-[550px] md:basis-1/2">
       <h2 className="py-2 text-center text-2xl font-semibold">
-        Recently Viewed
+        Recently Viewed Words
       </h2>
       <div className="flex h-[calc(100lvh-150px)] flex-col overflow-auto">
         {recentlyViewed.reverse().map((e, i) => {

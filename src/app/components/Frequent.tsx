@@ -691,8 +691,10 @@ const Frequent = () => {
     },
   ];
   return (
-    <div className="w-5/6 md:w-fit md:basis-1/2">
-      <h2 className="py-2 text-center text-2xl font-semibold">Most Frequent</h2>
+    <div className="w-5/6 md:w-fit md:max-w-[550px] md:basis-1/2">
+      <h2 className="py-2 text-center text-2xl font-semibold">
+        Most Frequent Words
+      </h2>
       <div className="flex h-[calc(100lvh-150px)] flex-col overflow-auto pr-2">
         {mostFrequent100.slice(0, 30).map((word, i) => {
           return (
