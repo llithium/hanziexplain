@@ -21,7 +21,7 @@ const RecentlyViewed = () => {
         Recently Viewed Words
       </h2>
       <div className="flex h-[calc(100lvh-150px)] flex-col overflow-auto">
-        {recentlyViewed.reverse().map((word, i) => {
+        {recentlyViewed.map((word, i) => {
           return (
             <div key={i} className="flex gap-2">
               <Link

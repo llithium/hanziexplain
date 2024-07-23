@@ -22,7 +22,6 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
           "recentlyViewed",
 
           JSON.stringify([
-            ...recentlyViewed.slice(1, recentlyViewedListSize),
             {
               simp: entries[0].simp,
               trad: entries[0].trad,
@@ -30,6 +29,7 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
               definition: entries[0].definitions[0],
               path: pathname,
             },
+            ...recentlyViewed.slice(0, recentlyViewedListSize - 1),
           ]),
         );
       } else {
@@ -37,7 +37,6 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
           "recentlyViewed",
 
           JSON.stringify([
-            ...recentlyViewed,
             {
               simp: entries[0].simp,
               trad: entries[0].trad,
@@ -45,6 +44,7 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
               definition: entries[0].definitions[0],
               path: pathname,
             },
+            ...recentlyViewed,
           ]),
         );
       }
