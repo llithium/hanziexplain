@@ -13,12 +13,12 @@ const TraditionalSwitcher = () => {
     <>
       <span className="font-hans">简</span>{" "}
       <Switch
-        className="m-0 font-hans"
+        className="m-0 font-hans transition-opacity hover:opacity-80 active:opacity-disabled"
         size="sm"
         color="default"
         isSelected={tradSelected}
         onValueChange={handleValueChange}
-      ></Switch>
+      />
       <span className="font-hans">繁</span>
     </>
   );

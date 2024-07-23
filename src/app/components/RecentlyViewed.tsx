@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { TraditionalContext } from "./traditional-provider";
+import capitalize from "../utils/capitalize";
 
 const RecentlyViewed = () => {
   const { tradSelected } = useContext(TraditionalContext);
@@ -20,15 +21,17 @@ const RecentlyViewed = () => {
         Recently Viewed Words
       </h2>
       <div className="flex h-[calc(100lvh-150px)] flex-col overflow-auto">
-        {recentlyViewed.reverse().map((e, i) => {
+        {recentlyViewed.reverse().map((word, i) => {
           return (
-            <Link
-              className="transition-opacity *:font-hans *:text-3xl hover:opacity-80 active:opacity-disabled"
-              key={i}
-              href={e.path}
-            >
-              {tradSelected ? <span>{e.trad}</span> : <span>{e.simp}</span>}
-            </Link>
+            <div key={i} className="flex gap-2">
+              <Link
+                className="transition-opacity *:font-hans *:text-3xl hover:opacity-80 active:opacity-disabled"
+                href={word.path}
+              >
+                <span>{tradSelected ? word.trad : word.simp}</span>
+              </Link>
+              <p className="self-end">{capitalize(word.definition)}</p>
+            </div>
           );
         })}
       </div>
@@ -43,4 +46,5 @@ interface RecentlyViewed {
   trad: string;
   pinyin: string;
   path: string;
+  definition: string;
 }

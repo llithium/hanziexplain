@@ -704,13 +704,11 @@ const Frequent = () => {
                 className="inline-block transition-opacity *:font-hans *:text-3xl hover:opacity-80 active:opacity-disabled"
                 href={`/${word.simp}`}
               >
-                {tradSelected ? (
-                  <span>{word.trad}</span>
-                ) : (
-                  <span>{word.simp}</span>
-                )}
+                <span>{tradSelected ? word.trad : word.simp}</span>
               </Link>
-              <p>{capitalize(JSON.parse(word.definitions)[0])}</p>
+              <p className="self-end">
+                {capitalize(JSON.parse(word.definitions)[0])}
+              </p>
             </div>
           );
         })}
