@@ -35,11 +35,11 @@ export default async function Search({
     res !== null ? ((await res.json()) as SearchResult[]) : [];
 
   return (
-    <div className="px-2">
+    <ul className="px-2">
       {searchResults.length > 0 || searchParams.q == "" ? (
         searchResults.map((result) => {
           return (
-            <div
+            <li
               className="font-hans"
               key={result.simp + result.trad + result.pinyin}
             >
@@ -61,7 +61,7 @@ export default async function Search({
                 })}
               </Link>
               <Divider className="my-2" />
-            </div>
+            </li>
           );
         })
       ) : (
@@ -74,6 +74,6 @@ export default async function Search({
           </h2>
         </div>
       )}
-    </div>
+    </ul>
   );
 }

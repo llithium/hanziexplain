@@ -66,12 +66,12 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
               </span>{" "}
               (by frequency)
             </h4>
-            <div className="flex flex-col gap-1">
+            <ul className="flex flex-col gap-1">
               {entries[0].statistics.topWords
                 ?.sort((a, b) => b.share - a.share)
                 .map((word, i) => {
                   return (
-                    <div key={word.share}>
+                    <li key={word.share}>
                       {/* <span>{word.share}</span> */}
                       {/* <span className="flex items-end text-sm opacity-70">
                         {i + 1}.
@@ -111,10 +111,10 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
                         )}
                       </div>
                       <span>{capitalize(word.gloss)}</span>
-                    </div>
+                    </li>
                   );
                 })}
-            </div>
+            </ul>
           </>
         )}
       </div>

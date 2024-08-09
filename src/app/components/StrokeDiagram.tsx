@@ -22,6 +22,8 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
   const [writers, setWriters] = useState<HanziWriter[]>([]);
 
   useEffect(() => {
+    setWriters([]);
+
     const writerOptions = {
       width: 150,
       height: 150,
@@ -65,7 +67,7 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
         element.loopCharacterAnimation();
       });
     }
-  }, [tradSelected]);
+  }, [simpCharsArray, tradCharsArray, tradSelected, writers]);
 
   return (
     <div className="embla w-[150px] overflow-hidden">

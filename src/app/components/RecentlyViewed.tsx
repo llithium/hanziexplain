@@ -20,21 +20,21 @@ const RecentlyViewed = () => {
       <h2 className="py-2 text-center text-2xl font-semibold">
         Recently Viewed Words
       </h2>
-      <div className="flex h-[calc(100lvh-150px)] flex-col overflow-auto">
+      <ul className="flex h-[calc(100lvh-150px)] flex-col overflow-auto">
         {recentlyViewed.map((word, i) => {
           return (
-            <div key={i} className="flex gap-2">
+            <li key={i} className="flex gap-2">
               <Link
                 className="transition-opacity *:font-hans *:text-3xl hover:opacity-80 active:opacity-disabled"
                 href={word.path}
               >
                 <span>{tradSelected ? word.trad : word.simp}</span>
               </Link>
-              <p className="self-end">{capitalize(word.definition)}</p>
-            </div>
+              <span className="self-end">{capitalize(word.definition)}</span>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   ) : null;
 };

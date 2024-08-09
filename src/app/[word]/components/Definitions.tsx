@@ -15,7 +15,7 @@ const Definitions = ({ entries }: { entries: Entry[] }) => {
                 <div>
                   <DefinitionCharacters entry={entry} />
                   <span className="pl-2">{entry.pinyin}</span>
-                  <div>
+                  <p>
                     {entry.definitions.map((definition, index) => {
                       return (
                         <span key={index + definition}>
@@ -24,7 +24,7 @@ const Definitions = ({ entries }: { entries: Entry[] }) => {
                         </span>
                       );
                     })}
-                  </div>
+                  </p>
                 </div>
               </div>
             );

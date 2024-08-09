@@ -15,11 +15,11 @@ const Components = ({ entries }: { entries: Entry[] }) => {
             <h2 className="pt-5 text-2xl font-semibold">Components</h2>
           )}
           {tradSelected ? (
-            <div className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2">
               {entries[0].tradEtymology?.components &&
                 entries[0].tradEtymology?.components.map((Component, i) => {
                   return (
-                    <div key={i}>
+                    <li key={i}>
                       <div className="flex items-end gap-2">
                         <Link
                           className="transition-opacity hover:opacity-80 active:opacity-disabled"
@@ -35,16 +35,16 @@ const Components = ({ entries }: { entries: Entry[] }) => {
                           Definition: {capitalize(Component.definition)}
                         </span>
                       </div>
-                    </div>
+                    </li>
                   );
                 })}
-            </div>
+            </ul>
           ) : (
-            <div className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2">
               {entries[0].simpEtymology?.components &&
                 entries[0].simpEtymology?.components.map((Component, i) => {
                   return (
-                    <div key={i}>
+                    <li key={i}>
                       <div className="flex items-end gap-2">
                         <Link
                           className="transition-opacity hover:opacity-80 active:opacity-disabled"
@@ -60,10 +60,10 @@ const Components = ({ entries }: { entries: Entry[] }) => {
                           Definition: {capitalize(Component.definition)}
                         </span>
                       </div>
-                    </div>
+                    </li>
                   );
                 })}
-            </div>
+            </ul>
           )}
         </>
       </div>

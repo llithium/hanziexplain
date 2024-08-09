@@ -695,10 +695,10 @@ const Frequent = () => {
       <h2 className="py-2 text-center text-2xl font-semibold">
         Most Frequent Words
       </h2>
-      <div className="flex h-[calc(100lvh-150px)] flex-col overflow-auto pr-2">
-        {mostFrequent100.slice(0, 30).map((word, i) => {
+      <ul className="flex h-[calc(100lvh-150px)] flex-col overflow-auto pr-2">
+        {mostFrequent100.slice(0, 100).map((word, i) => {
           return (
-            <div key={i} className="flex gap-2">
+            <li key={i} className="flex gap-2">
               <span className="w-6 self-end">{i + 1}.</span>
               <Link
                 className="inline-block transition-opacity *:font-hans *:text-3xl hover:opacity-80 active:opacity-disabled"
@@ -706,13 +706,13 @@ const Frequent = () => {
               >
                 <span>{tradSelected ? word.trad : word.simp}</span>
               </Link>
-              <p className="self-end">
+              <span className="self-end">
                 {capitalize(JSON.parse(word.definitions)[0])}
-              </p>
-            </div>
+              </span>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </div>
   );
 };

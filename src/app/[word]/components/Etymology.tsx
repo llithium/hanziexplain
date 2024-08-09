@@ -23,36 +23,32 @@ const Etymology = ({ entries }: { entries: Entry[] }) => {
           <span className="text-lg">{entries[0].simpEtymology?.notes}</span>
         </div>
       )}
-      <div className="flex h-full w-full items-center gap-2">
+      <ul className="flex h-full w-full items-center gap-2">
         {entries[0].tradEtymology?.images.map((image, i) => {
           return (
-            <>
-              <div key={i} className="flex flex-col items-center">
-                <Image
-                  className="h-32 w-32 dark:bg-current"
-                  src={image.url.slice(5, -2)}
-                  alt=""
-                />
-                <span className="text-sm">{image.caption}</span>
-              </div>
-            </>
+            <li key={`trad-${i}`} className="flex flex-col items-center">
+              <Image
+                className="h-32 w-32 dark:bg-current"
+                src={image.url.slice(5, -2)}
+                alt=""
+              />
+              <span className="text-sm">{image.caption}</span>
+            </li>
           );
         })}
         {entries[0].simpEtymology?.images.map((image, i) => {
           return (
-            <>
-              <div key={i} className="flex flex-col items-center">
-                <Image
-                  className="h-32 w-32 dark:bg-current"
-                  src={image.url.slice(5, -2)}
-                  alt=""
-                />
-                <span className="text-sm">{image.caption}</span>
-              </div>
-            </>
+            <li key={`simp-${i}`} className="flex flex-col items-center">
+              <Image
+                className="h-32 w-32 dark:bg-current"
+                src={image.url.slice(5, -2)}
+                alt=""
+              />
+              <span className="text-sm">{image.caption}</span>
+            </li>
           );
         })}
-      </div>
+      </ul>
     </>
   );
 };

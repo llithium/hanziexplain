@@ -25,7 +25,11 @@ export default function AppNavbar() {
   const pathname = usePathname();
 
   return (
-    <Navbar className="z-50 mb-3" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      className="z-50 mb-3"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent
         justify="start"
         className="basis-8 data-[justify=start]:flex-grow-0"
@@ -117,6 +121,7 @@ export default function AppNavbar() {
             color="foreground"
             className="w-full transition-opacity hover:opacity-80 active:opacity-disabled"
             href="/"
+            onClick={() => setIsMenuOpen(false)}
           >
             Home
           </Link>
