@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import { TraditionalContext } from "./traditional-provider";
 import Link from "next/link";
-import capitalize from "../utils/capitalize";
+import capitalize from "../../lib/capitalize";
 
 const Frequent = () => {
   const { tradSelected } = useContext(TraditionalContext);
@@ -701,7 +701,7 @@ const Frequent = () => {
             <li key={i} className="flex gap-2">
               <span className="w-6 self-end">{i + 1}.</span>
               <Link
-                className="inline-block transition-opacity *:font-hans *:text-3xl hover:opacity-80 active:opacity-disabled"
+                className="*:font-hans active:opacity-disabled inline-block transition-opacity *:text-3xl hover:opacity-80"
                 href={`/${word.simp}`}
               >
                 <span>{tradSelected ? word.trad : word.simp}</span>

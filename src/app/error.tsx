@@ -1,7 +1,7 @@
 "use client";
-import { Button } from "@nextui-org/button";
 
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function Error({
   error,
@@ -15,9 +15,9 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="fixed inset-0 h-svh w-screen ">
+    <div className="fixed inset-0 h-svh w-screen">
       <div className="mx-auto flex h-full w-fit flex-col items-center justify-center gap-2">
-        <h2 className="text-xl font-bold text-danger-500">
+        <h2 className="text-danger-500 text-xl font-bold">
           Something went wrong!
         </h2>
         <p className="text-center">{error.message}</p>

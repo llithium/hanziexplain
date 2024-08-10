@@ -1,6 +1,6 @@
 "use client";
 import { TraditionalContext } from "@/app/components/traditional-provider";
-import capitalize from "@/app/utils/capitalize";
+import capitalize from "@/lib/capitalize";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
 import { useContext } from "react";
@@ -22,7 +22,7 @@ const Components = ({ entries }: { entries: Entry[] }) => {
                     <li key={i}>
                       <div className="flex items-end gap-2">
                         <Link
-                          className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                          className="active:opacity-disabled transition-opacity hover:opacity-80"
                           href={`/${Component.char}`}
                         >
                           <span className="text-lg">{Component.char}</span>
@@ -47,7 +47,7 @@ const Components = ({ entries }: { entries: Entry[] }) => {
                     <li key={i}>
                       <div className="flex items-end gap-2">
                         <Link
-                          className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                          className="active:opacity-disabled transition-opacity hover:opacity-80"
                           href={`/${Component.char}`}
                         >
                           <span className="text-lg">{Component.char}</span>

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { TraditionalContext } from "./traditional-provider";
-import capitalize from "../utils/capitalize";
+import capitalize from "../../lib/capitalize";
 
 const RecentlyViewed = () => {
   const { tradSelected } = useContext(TraditionalContext);
@@ -25,7 +25,7 @@ const RecentlyViewed = () => {
           return (
             <li key={i} className="flex gap-2">
               <Link
-                className="transition-opacity *:font-hans *:text-3xl hover:opacity-80 active:opacity-disabled"
+                className="*:font-hans active:opacity-disabled transition-opacity *:text-3xl hover:opacity-80"
                 href={word.path}
               >
                 <span>{tradSelected ? word.trad : word.simp}</span>

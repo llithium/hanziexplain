@@ -1,14 +1,15 @@
 "use client";
 
-import { Button } from "@nextui-org/button";
-import {
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/dropdown";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const ThemeSwitcher = () => {
   const [mounted, setMounted] = useState(false);
@@ -22,46 +23,39 @@ const ThemeSwitcher = () => {
 
   return (
     <div>
-      <Dropdown>
-        <DropdownTrigger>
-          <Button
-            className="bg-transparent"
-            isIconOnly
-            aria-label="Theme switcher"
-          >
-            {theme === "light" && <LightIcon />}
-            {theme === "dark" && <DarkIcon />}
-            {theme === "system" && <SystemIcon />}
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu
-          selectionMode="single"
-          aria-label="Themes"
-          variant="light"
-        >
-          <DropdownItem
-            startContent={<LightIcon />}
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          {theme === "light" && <LightIcon />}
+          {theme === "dark" && <DarkIcon />}
+          {theme === "system" && <SystemIcon />}
+        </DropdownMenuTrigger>
+        <DropdownMenuContent aria-label="Themes">
+          <DropdownMenuItem
+            className="flex gap-2"
             key="light"
             onClick={() => setTheme("light")}
           >
-            Light
-          </DropdownItem>
-          <DropdownItem
-            startContent={<DarkIcon />}
+            <LightIcon />
+            <span>Light</span>
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="flex gap-2"
             key="dark"
             onClick={() => setTheme("dark")}
           >
+            <DarkIcon />
             Dark
-          </DropdownItem>
-          <DropdownItem
-            startContent={<SystemIcon />}
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="flex gap-2"
             key="system"
             onClick={() => setTheme("system")}
           >
+            <SystemIcon />
             System
-          </DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };
@@ -69,7 +63,7 @@ const ThemeSwitcher = () => {
 const LightIcon = () => {
   return (
     <svg
-      className="transition-opacity hover:opacity-80 active:opacity-disabled"
+      className="active:opacity-disabled transition-opacity hover:opacity-80"
       xmlns="http://www.w3.org/2000/svg"
       width="1rem"
       height="1rem"
@@ -86,7 +80,7 @@ const LightIcon = () => {
 const DarkIcon = () => {
   return (
     <svg
-      className="transition-opacity hover:opacity-80 active:opacity-disabled"
+      className="active:opacity-disabled transition-opacity hover:opacity-80"
       xmlns="http://www.w3.org/2000/svg"
       width="1rem"
       height="1rem"

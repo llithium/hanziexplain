@@ -4,8 +4,8 @@ import HanziWriter from "hanzi-writer";
 import { useTheme } from "next-themes";
 import { useCallback, useContext, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { Button } from "@nextui-org/button";
 import { TraditionalContext } from "./traditional-provider";
+import { Button } from "@/components/ui/button";
 
 const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
   const { theme } = useTheme();
@@ -79,7 +79,7 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
                 key={i}
                 className="embla__slide min-w-0 shrink-0 grow-0 basis-full"
               >
-                <div className="h-fit w-fit rounded-md bg-default-400/10">
+                <div className="bg-default-400/10 h-fit w-fit rounded-md">
                   <svg
                     className="fill-red-500 stroke-purple-400"
                     id={`stroke-diagram-${i}`}
@@ -131,7 +131,7 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
         <div className="flex w-full justify-center gap-2 py-1 *:bg-opacity-50">
           <Button
             className="embla__prev h-6 w-6 min-w-6 rounded-full"
-            isIconOnly
+            size={"icon"}
             onClick={scrollPrev}
           >
             <svg
@@ -148,7 +148,7 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
           </Button>
           <Button
             className="embla__next h-6 w-6 min-w-6 rounded-full"
-            isIconOnly
+            size={"icon"}
             onClick={scrollNext}
           >
             <svg

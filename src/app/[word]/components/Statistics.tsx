@@ -1,7 +1,7 @@
 "use client";
 import RecentlyViewed from "@/app/components/RecentlyViewed";
 import { TraditionalContext } from "@/app/components/traditional-provider";
-import capitalize from "@/app/utils/capitalize";
+import capitalize from "@/lib/capitalize";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -76,17 +76,17 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
                       {/* <span className="flex items-end text-sm opacity-70">
                         {i + 1}.
                       </span> */}
-                      <div className="flex gap-2 font-hans">
+                      <div className="font-hans flex gap-2">
                         {tradSelected ? (
                           <Link
-                            className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                            className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${word.trad}`}
                           >
                             <span className="text-lg">{word.trad}</span>
                           </Link>
                         ) : (
                           <Link
-                            className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                            className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${word.word}`}
                           >
                             <span className="text-lg">{word.word}</span>
@@ -95,7 +95,7 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
 
                         {tradSelected && word.word !== word.trad && (
                           <Link
-                            className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                            className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${word.word}`}
                           >
                             <span className="text-lg">{word.word}</span>
@@ -103,7 +103,7 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
                         )}
                         {!tradSelected && word.word !== word.trad && (
                           <Link
-                            className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                            className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${word.trad}`}
                           >
                             <span className="text-lg">{word.trad}</span>

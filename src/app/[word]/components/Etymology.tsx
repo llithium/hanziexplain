@@ -1,6 +1,5 @@
 "use client";
 import { TraditionalContext } from "@/app/components/traditional-provider";
-import { Image } from "@nextui-org/image";
 import { Entry } from "chinese-lexicon";
 import { useContext } from "react";
 
@@ -27,8 +26,8 @@ const Etymology = ({ entries }: { entries: Entry[] }) => {
         {entries[0].tradEtymology?.images.map((image, i) => {
           return (
             <li key={`trad-${i}`} className="flex flex-col items-center">
-              <Image
-                className="h-32 w-32 dark:bg-current"
+              <img
+                className="h-32 w-32 rounded-sm dark:bg-current"
                 src={image.url.slice(5, -2)}
                 alt=""
               />
@@ -39,8 +38,8 @@ const Etymology = ({ entries }: { entries: Entry[] }) => {
         {entries[0].simpEtymology?.images.map((image, i) => {
           return (
             <li key={`simp-${i}`} className="flex flex-col items-center">
-              <Image
-                className="h-32 w-32 dark:bg-current"
+              <img
+                className="h-32 w-32 rounded-sm dark:bg-current"
                 src={image.url.slice(5, -2)}
                 alt=""
               />

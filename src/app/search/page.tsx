@@ -1,9 +1,9 @@
-import { Divider } from "@nextui-org/divider";
 import { SearchResult } from "chinese-lexicon";
 import { Metadata } from "next";
 import Link from "next/link";
-import getURL from "@/app/utils/getURL";
+import getURL from "@/lib/getURL";
 import Characters from "./components/Characters";
+import { Separator } from "@/components/ui/separator";
 
 export async function generateMetadata({
   searchParams,
@@ -44,7 +44,7 @@ export default async function Search({
               key={result.simp + result.trad + result.pinyin}
             >
               <Link
-                className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                className="active:opacity-disabled transition-opacity hover:opacity-80"
                 href={`/${result.simp}`}
               >
                 <div className="flex items-end gap-2">
@@ -60,7 +60,7 @@ export default async function Search({
                   );
                 })}
               </Link>
-              <Divider className="my-2" />
+              <Separator className="my-2" />
             </li>
           );
         })

@@ -1,7 +1,7 @@
 import { Entry } from "chinese-lexicon";
 import { Metadata } from "next";
 import StrokeDiagram from "@/app/components/StrokeDiagram";
-import getURL from "@/app/utils/getURL";
+import getURL from "@/lib/getURL";
 import Etymology from "./components/Etymology";
 import Components from "./components/Components";
 import Statistics from "./components/Statistics";
@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: { word: string } }) {
 
   return (
     <div className="mx-auto w-11/12 pb-6 md:w-10/12">
-      <div className="flex h-fit w-full items-end gap-2 font-hans">
+      <div className="font-hans flex h-fit w-full items-end gap-2">
         <div className="flex items-end gap-2">
           <StrokeDiagram entries={entries} />
 

@@ -107,7 +107,7 @@ declare module "chinese-lexicon" {
     pinyin: string;
     searchablePinyin: string;
     pinyinTones: string;
-    simpEtymology: Etymology;
+    simpEtymology?: Etymology;
     tradEtymology?: Etymology;
     statistics: Statistics;
     boost: number;

@@ -3,7 +3,7 @@ import { Inter, Noto_Sans_SC } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-import AppNavbar from "@/app/components/AppNavbar";
+import Navbar from "@/app/components/Navbar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const notoSansSC = Noto_Sans_SC({
@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${notoSansSC.variable} font-sans`}>
         <Providers>
-          <AppNavbar />
+          <Navbar />
           {children}
         </Providers>
       </body>

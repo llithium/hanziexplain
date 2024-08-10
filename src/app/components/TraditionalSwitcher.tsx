@@ -1,7 +1,7 @@
 "use client";
-import { Switch } from "@nextui-org/switch";
 import { useContext } from "react";
 import { TraditionalContext } from "./traditional-provider";
+import { Switch } from "@/components/ui/switch";
 
 const TraditionalSwitcher = () => {
   const { tradSelected, setTradSelected } = useContext(TraditionalContext);
@@ -10,17 +10,16 @@ const TraditionalSwitcher = () => {
     localStorage.setItem("tradSelected", value.toString());
   }
   return (
-    <>
-      <span className="font-hans">简</span>{" "}
+    <div className="flex items-center gap-1">
+      <span className="font-hans">简</span>
       <Switch
-        className="m-0 font-hans"
-        size="sm"
+        className="font-hans m-0"
         color="default"
-        isSelected={tradSelected}
-        onValueChange={handleValueChange}
+        checked={tradSelected}
+        onCheckedChange={handleValueChange}
       />
       <span className="font-hans">繁</span>
-    </>
+    </div>
   );
 };
 
