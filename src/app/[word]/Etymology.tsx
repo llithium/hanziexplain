@@ -12,14 +12,14 @@ const Etymology = ({ entries }: { entries: Entry[] }) => {
           {entries[0].tradEtymology && (
             <h2 className="text-2xl font-semibold">Etymology</h2>
           )}
-          <span className="text-lg">{entries[0].tradEtymology?.notes}</span>
+          <p className="text-lg">{entries[0].tradEtymology?.notes}</p>
         </div>
       ) : (
         <div className="flex h-full flex-col pt-5">
           {entries[0].simpEtymology && (
             <h2 className="text-2xl font-semibold">Etymology</h2>
           )}
-          <span className="text-lg">{entries[0].simpEtymology?.notes}</span>
+          <p className="text-lg">{entries[0].simpEtymology?.notes}</p>
         </div>
       )}
       <ul className="flex h-full w-full items-center gap-2">
