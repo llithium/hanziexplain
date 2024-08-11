@@ -25,3 +25,16 @@ test("Traditional Toggle", async ({ page }) => {
     page.getByText("Simplified form of 門. Pictograph of a gate."),
   ).not.toBeVisible();
 });
+
+test("Search", async ({ page }) => {
+  await page.goto("/");
+  await page.waitForTimeout(500);
+
+  await page.getByRole("search").fill("space exploration");
+
+  await page.waitForTimeout(300);
+
+  await expect(page).toHaveTitle(/space exploration · Hanzi Explain/);
+
+  await expect(page.getByText("太空探索")).toBeVisible();
+});
