@@ -26,15 +26,26 @@ test("Traditional Toggle", async ({ page }) => {
   ).not.toBeVisible();
 });
 
-test("Search", async ({ page }) => {
+test("Search", async ({ page, browserName }) => {
   await page.goto("/");
-  await page.waitForTimeout(500);
+
+  browserName === "webkit" && (await page.waitForTimeout(2000));
 
   await page.getByRole("search").fill("space exploration");
 
-  await page.waitForTimeout(300);
+  // browserName === "webkit" && (await page.waitForTimeout(3000));
 
   await expect(page).toHaveTitle(/space exploration · Hanzi Explain/);
+
+  await expect(page.getByText("太空探索")).toBeVisible();
+});
+
+test("Recently viewed in local storage", async ({ page }) => {
+  await page.goto("/太空探索");
+
+  await page.waitForTimeout(500);
+
+  await page.goto("/");
 
   await expect(page.getByText("太空探索")).toBeVisible();
 });
