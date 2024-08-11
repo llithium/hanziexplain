@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import ThemeSwitcher from "@/app/components/ThemeSwitcher";
-import TraditionalSwitcher from "./TraditionalSwitcher";
+import ThemeSwitcher from "@/components/ui/ThemeSwitcher";
+import TraditionalSwitcher from "@/components/ui/TraditionalSwitcher";
 import {
   NavigationMenu,
   NavigationMenuContent,

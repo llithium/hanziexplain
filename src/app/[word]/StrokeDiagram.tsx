@@ -4,7 +4,7 @@ import HanziWriter from "hanzi-writer";
 import { useTheme } from "next-themes";
 import { useCallback, useContext, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { TraditionalContext } from "./traditional-provider";
+import { TraditionalContext } from "@/components/providers/traditional-provider";
 import { Button } from "@/components/ui/button";
 
 const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
@@ -132,6 +132,8 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
           <Button
             className="embla__prev h-6 w-6 min-w-6 rounded-full"
             size={"icon"}
+            // variant={"ghost"}
+            variant={"outline"}
             onClick={scrollPrev}
           >
             <svg
@@ -149,6 +151,8 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
           <Button
             className="embla__next h-6 w-6 min-w-6 rounded-full"
             size={"icon"}
+            // variant={"ghost"}
+            variant={"outline"}
             onClick={scrollNext}
           >
             <svg

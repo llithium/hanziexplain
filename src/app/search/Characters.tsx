@@ -1,5 +1,5 @@
 "use client";
-import { TraditionalContext } from "@/app/components/traditional-provider";
+import { TraditionalContext } from "@/components/providers/traditional-provider";
 import { SearchResult } from "chinese-lexicon";
 import { useContext } from "react";
 

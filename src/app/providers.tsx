@@ -2,7 +2,7 @@
 
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { useRouter } from "next/navigation";
-import TraditionalProvider from "./components/traditional-provider";
+import TraditionalProvider from "@/components/providers/traditional-provider";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const router = useRouter();

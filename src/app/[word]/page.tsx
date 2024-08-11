@@ -1,12 +1,12 @@
 import { Entry } from "chinese-lexicon";
 import { Metadata } from "next";
-import StrokeDiagram from "@/app/components/StrokeDiagram";
-import getURL from "@/lib/getURL";
-import Etymology from "./components/Etymology";
-import Components from "./components/Components";
-import Statistics from "./components/Statistics";
-import UsedAsComponentIn from "./components/UsedAsCompnentIn";
-import Definitions from "./components/Definitions";
+import StrokeDiagram from "./StrokeDiagram";
+import { getURL } from "@/lib/utils";
+import Etymology from "./Etymology";
+import Components from "./Components";
+import Statistics from "./Statistics";
+import UsedAsComponentIn from "./UsedAsComponentIn";
+import Definitions from "./Definitions";
 
 export async function generateMetadata({
   params,
@@ -29,7 +29,7 @@ export default async function Page({ params }: { params: { word: string } }) {
 
   return (
     <div className="mx-auto w-11/12 pb-6 md:w-10/12">
-      <div className="font-hans flex h-fit w-full items-end gap-2">
+      <div className="flex h-fit w-full items-end gap-2 font-hans">
         <div className="flex items-end gap-2">
           <StrokeDiagram entries={entries} />
 

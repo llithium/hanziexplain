@@ -1,8 +1,8 @@
 import { SearchResult } from "chinese-lexicon";
 import { Metadata } from "next";
 import Link from "next/link";
-import getURL from "@/lib/getURL";
-import Characters from "./components/Characters";
+import { getURL } from "@/lib/utils";
+import Characters from "./Characters";
 import { Separator } from "@/components/ui/separator";
 
 export async function generateMetadata({

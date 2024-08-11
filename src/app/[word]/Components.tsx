@@ -1,6 +1,6 @@
 "use client";
-import { TraditionalContext } from "@/app/components/traditional-provider";
-import capitalize from "@/lib/capitalize";
+import { TraditionalContext } from "@/components/providers/traditional-provider";
+import { capitalize } from "@/lib/utils";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
 import { useContext } from "react";

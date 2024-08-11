@@ -1,5 +1,5 @@
 "use client";
-import { TraditionalContext } from "@/app/components/traditional-provider";
+import { TraditionalContext } from "@/components/providers/traditional-provider";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
 import { useContext } from "react";
@@ -11,27 +11,27 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
       <div>
         {tradSelected
           ? Array.from(entry.trad).map((char, i) => {
-            return (
-              <Link
-                key={char + i}
-                href={char}
-                className="transition-opacity hover:opacity-80 active:opacity-disabled"
-              >
-                <span>{char}</span>
-              </Link>
-            );
-          })
+              return (
+                <Link
+                  key={char + i}
+                  href={char}
+                  className="active:opacity-disabled transition-opacity hover:opacity-80"
+                >
+                  <span>{char}</span>
+                </Link>
+              );
+            })
           : Array.from(entry.simp).map((char, i) => {
-            return (
-              <Link
-                key={char + i}
-                href={char}
-                className="transition-opacity hover:opacity-80 active:opacity-disabled"
-              >
-                <span>{char}</span>
-              </Link>
-            );
-          })}
+              return (
+                <Link
+                  key={char + i}
+                  href={char}
+                  className="active:opacity-disabled transition-opacity hover:opacity-80"
+                >
+                  <span>{char}</span>
+                </Link>
+              );
+            })}
       </div>
       <div>
         {tradSelected &&
@@ -41,7 +41,7 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
               <Link
                 key={char + i}
                 href={char}
-                className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                className="active:opacity-disabled transition-opacity hover:opacity-80"
               >
                 <span>{char}</span>
               </Link>
@@ -54,7 +54,7 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
               <Link
                 key={char + i}
                 href={char}
-                className="transition-opacity hover:opacity-80 active:opacity-disabled"
+                className="active:opacity-disabled transition-opacity hover:opacity-80"
               >
                 <span>{char}</span>
               </Link>

@@ -1,7 +1,7 @@
 "use client";
-import RecentlyViewed from "@/app/components/RecentlyViewed";
-import { TraditionalContext } from "@/app/components/traditional-provider";
-import capitalize from "@/lib/capitalize";
+import RecentlyViewed from "@/app/RecentlyViewed";
+import { TraditionalContext } from "@/components/providers/traditional-provider";
+import { capitalize } from "@/lib/utils";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -76,7 +76,7 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
                       {/* <span className="flex items-end text-sm opacity-70">
                         {i + 1}.
                       </span> */}
-                      <div className="font-hans flex gap-2">
+                      <div className="flex gap-2 font-hans">
                         {tradSelected ? (
                           <Link
                             className="active:opacity-disabled transition-opacity hover:opacity-80"

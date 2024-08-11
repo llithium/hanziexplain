@@ -1,4 +1,4 @@
-import capitalize from "@/lib/capitalize";
+import { capitalize } from "@/lib/utils";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
 import DefinitionCharacters from "./DefinitionCharacters";

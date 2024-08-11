@@ -1,6 +1,6 @@
 "use client";
 import { useContext } from "react";
-import { TraditionalContext } from "./traditional-provider";
+import { TraditionalContext } from "@/components/providers/traditional-provider";
 import { Switch } from "@/components/ui/switch";
 
 const TraditionalSwitcher = () => {
@@ -13,7 +13,7 @@ const TraditionalSwitcher = () => {
     <div className="flex items-center gap-1">
       <span className="font-hans">简</span>
       <Switch
-        className="font-hans m-0"
+        className="m-0 font-hans"
         color="default"
         checked={tradSelected}
         onCheckedChange={handleValueChange}

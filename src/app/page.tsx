@@ -1,5 +1,5 @@
-import Frequent from "./components/Frequent";
-import RecentlyViewed from "./components/RecentlyViewed";
+import Frequent from "@/app/Frequent";
+import RecentlyViewed from "@/app/RecentlyViewed";
 
 export default function Home() {
   return (

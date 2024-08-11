@@ -3,7 +3,7 @@ import { Inter, Noto_Sans_SC } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 
-import Navbar from "@/app/components/Navbar";
+import Navbar from "@/components/ui/Navbar";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const notoSansSC = Noto_Sans_SC({
