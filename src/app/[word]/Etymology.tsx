@@ -7,7 +7,7 @@ const Etymology = ({ entries }: { entries: Entry[] }) => {
   const { tradSelected } = useContext(TraditionalContext);
   return (
     <>
-      {tradSelected ? (
+      {tradSelected && entries[0].tradEtymology ? (
         <div className="flex h-full flex-col pt-5">
           {entries[0].tradEtymology && (
             <h2 className="text-2xl font-semibold">Etymology</h2>

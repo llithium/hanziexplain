@@ -4,7 +4,8 @@ declare module "chinese-lexicon" {
   export function getEtymology(character: string): Etymology;
   export function getGloss(character: string, pinyin?: string): string;
   export const allEntries: Entry[];
-
+  export const simpDict: SimpDict;
+  export const tradDict: TradDict;
   export interface SearchResult {
     simp: string;
     trad: string;
@@ -50,7 +51,7 @@ declare module "chinese-lexicon" {
   }
 
   export interface Statistics {
-    hskLevel: number;
+    hskLevel: string;
     movieWordCount?: number;
     movieWordCountPercent?: number;
     movieWordRank?: number;
@@ -112,5 +113,16 @@ declare module "chinese-lexicon" {
     statistics: Statistics;
     boost: number;
     usedAsComponentIn: UsedAsComponentIn;
+  }
+
+  export interface SimpDict {
+    [word: string]: Entry[];
+  }
+  export interface TradDict {
+    [word: string]: Entry[];
+  }
+
+  export interface EtymologyDict {
+    [word: string]: Etymology;
   }
 }

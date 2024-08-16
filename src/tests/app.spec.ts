@@ -24,6 +24,12 @@ test("Traditional Toggle", async ({ page }) => {
   await expect(
     page.getByText("Simplified form of 門. Pictograph of a gate."),
   ).not.toBeVisible();
+
+  await page.getByRole("switch").click();
+
+  await expect(
+    page.getByText("Simplified form of 門. Pictograph of a gate."),
+  ).toBeVisible();
 });
 
 test("Search", async ({ page, browserName }) => {
@@ -32,8 +38,6 @@ test("Search", async ({ page, browserName }) => {
   browserName === "webkit" && (await page.waitForTimeout(2000));
 
   await page.getByRole("search").fill("space exploration");
-
-  // browserName === "webkit" && (await page.waitForTimeout(3000));
 
   await expect(page).toHaveTitle(/space exploration · Hanzi Explain/);
 

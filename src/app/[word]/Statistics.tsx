@@ -1,55 +1,15 @@
 "use client";
-import RecentlyViewed from "@/app/RecentlyViewed";
 import { TraditionalContext } from "@/components/providers/traditional-provider";
+import addToLocalStorage from "./addToLocalStorage";
 import { capitalize } from "@/lib/utils";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useContext } from "react";
 
 const Statistics = ({ entries }: { entries: Entry[] }) => {
   const { tradSelected } = useContext(TraditionalContext);
-  const pathname = decodeURI(usePathname());
+  addToLocalStorage(entries);
 
-  if (typeof window !== "undefined") {
-    const recentlyViewed: RecentlyViewed[] = JSON.parse(
-      localStorage.getItem("recentlyViewed") || "[]",
-    );
-    const recentlyViewedListSize = 20;
-    if (!recentlyViewed.some((e) => e.path === pathname)) {
-      if (recentlyViewed.length >= recentlyViewedListSize) {
-        localStorage.setItem(
-          "recentlyViewed",
-
-          JSON.stringify([
-            {
-              simp: entries[0].simp,
-              trad: entries[0].trad,
-              pinyin: entries[0].pinyin,
-              definition: entries[0].definitions[0],
-              path: pathname,
-            },
-            ...recentlyViewed.slice(0, recentlyViewedListSize - 1),
-          ]),
-        );
-      } else {
-        localStorage.setItem(
-          "recentlyViewed",
-
-          JSON.stringify([
-            {
-              simp: entries[0].simp,
-              trad: entries[0].trad,
-              pinyin: entries[0].pinyin,
-              definition: entries[0].definitions[0],
-              path: pathname,
-            },
-            ...recentlyViewed,
-          ]),
-        );
-      }
-    }
-  }
   return (
     <>
       <div>
@@ -66,7 +26,7 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
               </span>{" "}
               (by frequency)
             </h4>
-            <ul className="flex flex-col gap-1">
+            <ul className="flex flex-col gap-2 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
               {entries[0].statistics.topWords
                 ?.sort((a, b) => b.share - a.share)
                 .map((word, i) => {
