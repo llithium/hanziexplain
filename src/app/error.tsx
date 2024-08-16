@@ -21,6 +21,7 @@ export default function Error({
           Something went wrong!
         </h2>
         <p className="text-center">{error.message}</p>
+        <p className="text-center">{error.digest}</p>
         <Button color="default" onClick={reset}>
           Try again
         </Button>

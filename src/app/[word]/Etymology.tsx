@@ -3,27 +3,37 @@ import { TraditionalContext } from "@/components/providers/traditional-provider"
 import { Entry } from "chinese-lexicon";
 import { useContext } from "react";
 
-const Etymology = ({ entries }: { entries: Entry[] }) => {
+const Etymology = ({
+  entries,
+  currentEntry,
+}: {
+  entries: Entry[];
+  currentEntry: number;
+}) => {
   const { tradSelected } = useContext(TraditionalContext);
   return (
     <>
-      {tradSelected && entries[0].tradEtymology ? (
+      {tradSelected && entries[currentEntry].tradEtymology ? (
         <div className="flex h-full flex-col pt-5">
-          {entries[0].tradEtymology && (
+          {entries[currentEntry].tradEtymology && (
             <h2 className="text-2xl font-semibold">Etymology</h2>
           )}
-          <p className="text-lg">{entries[0].tradEtymology?.notes}</p>
+          <p className="text-lg">
+            {entries[currentEntry].tradEtymology?.notes}
+          </p>
         </div>
       ) : (
         <div className="flex h-full flex-col pt-5">
-          {entries[0].simpEtymology && (
+          {entries[currentEntry].simpEtymology && (
             <h2 className="text-2xl font-semibold">Etymology</h2>
           )}
-          <p className="text-lg">{entries[0].simpEtymology?.notes}</p>
+          <p className="text-lg">
+            {entries[currentEntry].simpEtymology?.notes}
+          </p>
         </div>
       )}
       <ul className="flex h-full w-full items-center gap-2">
-        {entries[0].tradEtymology?.images.map((image, i) => {
+        {entries[currentEntry].tradEtymology?.images.map((image, i) => {
           return (
             <li key={`trad-${i}`} className="flex flex-col items-center">
               <img
@@ -35,7 +45,7 @@ const Etymology = ({ entries }: { entries: Entry[] }) => {
             </li>
           );
         })}
-        {entries[0].simpEtymology?.images.map((image, i) => {
+        {entries[currentEntry].simpEtymology?.images.map((image, i) => {
           return (
             <li key={`simp-${i}`} className="flex flex-col items-center">
               <img

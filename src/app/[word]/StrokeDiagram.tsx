@@ -7,7 +7,13 @@ import useEmblaCarousel from "embla-carousel-react";
 import { TraditionalContext } from "@/components/providers/traditional-provider";
 import { Button } from "@/components/ui/button";
 
-const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
+const StrokeDiagram = ({
+  entries,
+  currentEntry,
+}: {
+  entries: Entry[];
+  currentEntry: number;
+}) => {
   const { theme } = useTheme();
   const { tradSelected } = useContext(TraditionalContext);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
@@ -17,8 +23,8 @@ const StrokeDiagram = ({ entries }: { entries: Entry[] }) => {
   const scrollNext = useCallback(() => {
     if (emblaApi) emblaApi.scrollNext();
   }, [emblaApi]);
-  const simpCharsArray = Array.from(entries[0].simp);
-  const tradCharsArray = Array.from(entries[0].trad);
+  const simpCharsArray = Array.from(entries[currentEntry].simp);
+  const tradCharsArray = Array.from(entries[currentEntry].trad);
   const [writers, setWriters] = useState<HanziWriter[]>([]);
 
   useEffect(() => {

@@ -3,7 +3,13 @@ import { Entry } from "chinese-lexicon";
 import Link from "next/link";
 import DefinitionCharacters from "./DefinitionCharacters";
 
-const Definitions = ({ entries }: { entries: Entry[] }) => {
+const Definitions = ({
+  entries,
+  currentEntry,
+}: {
+  entries: Entry[];
+  currentEntry: number;
+}) => {
   return (
     <>
       <div>
@@ -12,7 +18,9 @@ const Definitions = ({ entries }: { entries: Entry[] }) => {
           {entries.map((entry, i) => {
             return (
               <div className="flex flex-col" key={i}>
-                <div>
+                <div
+                // className={` ${currentEntry === i ? "rounded-sm bg-primary/20" : ""}`}
+                >
                   <DefinitionCharacters entry={entry} />
                   <span className="pl-2">{entry.pinyin}</span>
                   <p>

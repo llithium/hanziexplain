@@ -6,7 +6,13 @@ import { Entry } from "chinese-lexicon";
 import Link from "next/link";
 import { useContext } from "react";
 
-const Statistics = ({ entries }: { entries: Entry[] }) => {
+const Statistics = ({
+  entries,
+  currentEntry,
+}: {
+  entries: Entry[];
+  currentEntry: number;
+}) => {
   const { tradSelected } = useContext(TraditionalContext);
   addToLocalStorage(entries);
 
@@ -15,19 +21,21 @@ const Statistics = ({ entries }: { entries: Entry[] }) => {
       <div>
         <h2 className="pt-5 text-2xl font-semibold">Statistics</h2>
         <h3 className="pb-3 text-xl font-semibold">
-          HSK: {entries[0].statistics.hskLevel}
+          HSK: {entries[currentEntry].statistics.hskLevel}
         </h3>
-        {entries[0].statistics.topWords && (
+        {entries[currentEntry].statistics.topWords && (
           <>
             <h4 className="text-xl font-semibold">
               Words containing{" "}
               <span className="font-hans">
-                {tradSelected ? entries[0].trad : entries[0].simp}
+                {tradSelected
+                  ? entries[currentEntry].trad
+                  : entries[currentEntry].simp}
               </span>{" "}
               (by frequency)
             </h4>
             <ul className="flex flex-col gap-2 md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {entries[0].statistics.topWords
+              {entries[currentEntry].statistics.topWords
                 ?.sort((a, b) => b.share - a.share)
                 .map((word, i) => {
                   return (

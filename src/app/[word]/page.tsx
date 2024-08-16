@@ -7,6 +7,7 @@ import Components from "./Components";
 import Statistics from "./Statistics";
 import UsedAsComponentIn from "./UsedAsComponentIn";
 import Definitions from "./Definitions";
+import EntryButton from "./EntryButton";
 
 export async function generateMetadata({
   params,
@@ -18,20 +19,52 @@ export async function generateMetadata({
 }
 export const maxDuration = 30;
 
-export default async function Page({ params }: { params: { word: string } }) {
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { word: string };
+  searchParams: { [key: string]: string | undefined };
+}) {
   const res = await fetch(getURL() + "api/entries/" + params.word);
   if (!res.ok) {
     throw new Error(`Error:${res.status}, ${res.statusText}`);
   }
   const entries = (await res.json()) as Entry[];
-
+  const currentEntry = searchParams.entry ? parseInt(searchParams.entry) : 0;
   console.log(entries);
+
+  function areEntriesSimilar(entries: Entry[]): boolean {
+    if (entries.length === 0) return true;
+
+    const getComparableProps = (entry: Entry) => {
+      const {
+        definitions,
+        pinyin,
+        searchablePinyin,
+        pinyinTones,
+        boost,
+        statistics,
+        ...comparableProps
+      } = entry;
+      return comparableProps;
+    };
+
+    const firstEntryProps = getComparableProps(entries[0]);
+
+    return entries.every((entry) => {
+      const currentEntryProps = getComparableProps(entry);
+      return (
+        JSON.stringify(currentEntryProps) === JSON.stringify(firstEntryProps)
+      );
+    });
+  }
 
   return (
     <div className="mx-auto w-11/12 pb-6 md:w-10/12">
-      <div className="flex h-fit w-full items-end gap-2 font-hans">
+      <div className="flex h-fit w-full items-end justify-between gap-2 font-hans">
         <div className="flex items-end gap-2">
-          <StrokeDiagram entries={entries} />
+          <StrokeDiagram entries={entries} currentEntry={currentEntry} />
 
           {entries.map((entry, index) => (
             <span key={entry.boost + index} className="font-sans text-2xl">
@@ -40,12 +73,19 @@ export default async function Page({ params }: { params: { word: string } }) {
             </span>
           ))}
         </div>
+        {entries.length > 1 && !areEntriesSimilar(entries) ? (
+          <EntryButton
+            entries={entries}
+            currentEntry={currentEntry}
+            numberOfEntries={entries.length}
+          />
+        ) : null}
       </div>
-      <Definitions entries={entries} />
-      <Etymology entries={entries} />
-      <Components entries={entries} />
-      <UsedAsComponentIn entries={entries} />
-      <Statistics entries={entries} />
+      <Definitions entries={entries} currentEntry={currentEntry} />
+      <Etymology entries={entries} currentEntry={currentEntry} />
+      <Components entries={entries} currentEntry={currentEntry} />
+      <UsedAsComponentIn entries={entries} currentEntry={currentEntry} />
+      <Statistics entries={entries} currentEntry={currentEntry} />
     </div>
   );
 }

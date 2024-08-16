@@ -1,6 +1,5 @@
 import { getEntries } from "chinese-lexicon";
 export const maxDuration = 30;
-export const dynamic = "force-static";
 
 export function GET(
   request: Request,
