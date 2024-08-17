@@ -50,6 +50,12 @@ export const columns: ColumnDef<Entry>[] = [
     },
   },
   {
+    accessorKey: "pinyin",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Pinyin" />
+    ),
+  },
+  {
     accessorKey: "definitions",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Definitions" />
@@ -73,12 +79,6 @@ export const columns: ColumnDef<Entry>[] = [
         </div>
       );
     },
-  },
-  {
-    accessorKey: "pinyin",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Pinyin" />
-    ),
   },
   {
     accessorKey: "simpEtymology.notes",

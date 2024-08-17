@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { TraditionalContext } from "../components/providers/traditional-provider";
 import Link from "next/link";
 import { capitalize } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Frequent = () => {
   const { tradSelected } = useContext(TraditionalContext);
@@ -695,7 +696,7 @@ const Frequent = () => {
       <h2 className="py-2 text-center text-2xl font-semibold">
         Most Frequent Words
       </h2>
-      <ul className="flex h-[calc(100lvh-150px)] flex-col overflow-auto pr-2">
+      <ScrollArea className="h-[calc(100lvh-150px)] pr-2">
         {mostFrequent100.slice(0, 100).map((word, i) => {
           return (
             <li key={i} className="flex gap-2">
@@ -712,7 +713,7 @@ const Frequent = () => {
             </li>
           );
         })}
-      </ul>
+      </ScrollArea>
     </div>
   );
 };

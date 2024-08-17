@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { TraditionalContext } from "../components/providers/traditional-provider";
 import { capitalize } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const RecentlyViewed = () => {
   const { tradSelected } = useContext(TraditionalContext);
@@ -20,7 +21,7 @@ const RecentlyViewed = () => {
       <h2 className="py-2 text-center text-2xl font-semibold">
         Recently Viewed Words
       </h2>
-      <ul className="flex h-[calc(100lvh-150px)] flex-col overflow-auto">
+      <ScrollArea className="h-[calc(100lvh-150px)]">
         {recentlyViewed.map((word, i) => {
           return (
             <li key={i} className="flex gap-2">
@@ -34,7 +35,7 @@ const RecentlyViewed = () => {
             </li>
           );
         })}
-      </ul>
+      </ScrollArea>
     </div>
   ) : null;
 };
