@@ -24,7 +24,7 @@ const SearchInput = () => {
       }}
     >
       <Input
-        className="min-w-40 max-w-96 sm:max-w-none"
+        className="max-w-96 sm:max-w-none"
         name="search"
         role="search"
         onChange={(event) => setSearchTerm(event.currentTarget.value)}

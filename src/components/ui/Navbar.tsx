@@ -16,55 +16,84 @@ import {
   navigationMenuTriggerStyle,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
 import SearchInput from "./SearchInput";
+import { Menu } from "lucide-react";
 
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
+// const components: { title: string; href: string; description: string }[] = [
+//   {
+//     title: "Alert Dialog",
+//     href: "/docs/primitives/alert-dialog",
+//     description:
+//       "A modal dialog that interrupts the user with important content and expects a response.",
+//   },
+//   {
+//     title: "Hover Card",
+//     href: "/docs/primitives/hover-card",
+//     description:
+//       "For sighted users to preview content available behind a link.",
+//   },
+//   {
+//     title: "Progress",
+//     href: "/docs/primitives/progress",
+//     description:
+//       "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+//   },
+//   {
+//     title: "Scroll-area",
+//     href: "/docs/primitives/scroll-area",
+//     description: "Visually or semantically separates content.",
+//   },
+//   {
+//     title: "Tabs",
+//     href: "/docs/primitives/tabs",
+//     description:
+//       "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+//   },
+//   {
+//     title: "Tooltip",
+//     href: "/docs/primitives/tooltip",
+//     description:
+//       "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+//   },
+// ];
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
   return (
-    <nav className="mx-auto flex h-auto items-center justify-center gap-2 py-2 md:w-4/6">
-      <NavigationMenu className="flex-shrink justify-self-start">
+    <nav className="mx-auto flex h-auto items-center justify-center gap-3 px-2 py-2 md:w-4/6">
+      <div className="sm:hidden">
+        <DropdownMenu>
+          <DropdownMenuTrigger className="flex flex-col items-center justify-center">
+            <Menu />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator /> */}
+            <DropdownMenuItem>
+              <Link className="h-full w-full" href="/">
+                Home
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link className="h-full w-full" href="/words">
+                Words
+              </Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+      <NavigationMenu className="hidden flex-shrink justify-self-start sm:block">
         <NavigationMenuList>
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
@@ -131,13 +160,13 @@ export default function Navbar() {
           </NavigationMenuContent>
         </NavigationMenuItem> */}
       </NavigationMenu>
-      <div className="flex flex-grow items-center justify-center">
+      <div className="flex flex-shrink items-center justify-center sm:flex-grow">
         <SearchInput />
       </div>
-      <div className="justify-self-end px-4">
+      <div className="justify-self-end">
         <TraditionalSwitcher />
       </div>
-      <div className="justify-self-end px-4">
+      <div className="justify-self-end pt-[5px]">
         <ThemeSwitcher />
       </div>
     </nav>
