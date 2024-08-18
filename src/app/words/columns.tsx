@@ -81,24 +81,24 @@ export const columns: ColumnDef<Entry>[] = [
     },
   },
   {
-    accessorKey: "simpEtymology.notes",
+    accessorKey: "simpEtymology",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Simplified Etymology" />
     ),
   },
   {
-    accessorKey: "tradEtymology.notes",
+    accessorKey: "tradEtymology",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Traditional Etymology" />
     ),
   },
   {
-    accessorKey: "statistics.hskLevel",
+    accessorKey: "hskLevel",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="HSK Level" />
     ),
     cell: ({ row }) => {
-      const hskLevel: string = row.getValue("statistics_hskLevel");
+      const hskLevel: string = row.getValue("hskLevel");
       return <div className="text-center">{hskLevel}</div>;
     },
   },
@@ -109,13 +109,13 @@ export const columns: ColumnDef<Entry>[] = [
     ),
   },
   {
-    accessorKey: "statistics.topWords.length",
+    accessorKey: "wordsUsedIn",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Words Used In" />
     ),
   },
   {
-    accessorKey: "usedAsComponentIn.simp.count",
+    accessorKey: "usedAsComponentInSimp",
     header: ({ column }) => (
       <DataTableColumnHeader
         column={column}
@@ -124,7 +124,7 @@ export const columns: ColumnDef<Entry>[] = [
     ),
   },
   {
-    accessorKey: "usedAsComponentIn.trad.count",
+    accessorKey: "usedAsComponentInTrad",
     header: ({ column }) => (
       <DataTableColumnHeader
         column={column}

@@ -65,10 +65,11 @@ export function DataTable<TData, TValue>({
         process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       );
       const { data, error } = await supabase
-        .from("entries")
+        .from("entries_data_table")
         .select("*")
-        // TODO: fix sorting
-        // .order(sorting[0].id, { ascending: sorting[0].desc })
+        .order(sorting[0] ? sorting[0].id : "boost", {
+          ascending: sorting[0] ? !sorting[0].desc : false,
+        })
         .range(
           table.getState().pagination.pageIndex *
             table.getState().pagination.pageSize,
@@ -79,23 +80,14 @@ export function DataTable<TData, TValue>({
       if (error) {
         throw error;
       }
+      console.log(data);
 
       const parsedData =
         data &&
         data.map((entry: any) => {
           return {
             ...entry,
-            statistics: entry.statistics ? JSON.parse(entry.statistics) : {},
             definitions: entry.definitions ? JSON.parse(entry.definitions) : [],
-            simpEtymology: entry.simpEtymology
-              ? JSON.parse(entry.simpEtymology)
-              : {},
-            tradEtymology: entry.tradEtymology
-              ? JSON.parse(entry.tradEtymology)
-              : {},
-            usedAsComponentIn: entry.usedAsComponentIn
-              ? JSON.parse(entry.usedAsComponentIn)
-              : {},
           };
         });
       setData(parsedData as TData[]);
