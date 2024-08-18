@@ -19,13 +19,15 @@ const Statistics = ({
   return (
     <>
       <div>
-        <h2 className="pt-5 text-2xl font-semibold">Statistics</h2>
-        <h3 className="pb-3 text-xl font-semibold">
+        <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          Statistics
+        </h2>
+        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight">
           HSK: {entries[currentEntry].statistics.hskLevel}
         </h3>
         {entries[currentEntry].statistics.topWords && (
           <>
-            <h4 className="text-xl font-semibold">
+            <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">
               Words containing{" "}
               <span className="font-hans">
                 {tradSelected

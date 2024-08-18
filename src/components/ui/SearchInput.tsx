@@ -11,7 +11,9 @@ const SearchInput = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   useEffect(() => {
-    rendered && router.push(`/search?q=${debouncedSearchTerm}`);
+    if (rendered && debouncedSearchTerm !== "") {
+      router.push(`/search?q=${debouncedSearchTerm}`);
+    }
     setRendered(true);
   }, [debouncedSearchTerm, router]);
 

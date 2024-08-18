@@ -14,20 +14,24 @@ const Etymology = ({
   return (
     <>
       {tradSelected && entries[currentEntry].tradEtymology ? (
-        <div className="flex h-full flex-col pt-5">
+        <div className="flex h-full flex-col pb-2 pt-5">
           {entries[currentEntry].tradEtymology && (
-            <h2 className="text-2xl font-semibold">Etymology</h2>
+            <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+              Etymology
+            </h2>
           )}
-          <p className="text-lg">
+          <p className="leading-7">
             {entries[currentEntry].tradEtymology?.notes}
           </p>
         </div>
       ) : (
-        <div className="flex h-full flex-col pt-5">
+        <div className="flex h-full flex-col pb-2 pt-5">
           {entries[currentEntry].simpEtymology && (
-            <h2 className="text-2xl font-semibold">Etymology</h2>
+            <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+              Etymology
+            </h2>
           )}
-          <p className="text-lg">
+          <p className="leading-7">
             {entries[currentEntry].simpEtymology?.notes}
           </p>
         </div>

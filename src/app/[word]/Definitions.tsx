@@ -13,17 +13,17 @@ const Definitions = ({
   return (
     <>
       <div>
-        <h2 className="text-2xl font-semibold">Definition</h2>
+        <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+          Definitions
+        </h2>
         <div className="flex flex-col gap-3 text-lg">
           {entries.map((entry, i) => {
             return (
               <div className="flex flex-col" key={i}>
-                <div
-                // className={` ${currentEntry === i ? "rounded-sm bg-primary/20" : ""}`}
-                >
+                <div>
                   <DefinitionCharacters entry={entry} />
                   <span className="pl-2">{entry.pinyin}</span>
-                  <p>
+                  <p className="text-base leading-7">
                     {entry.definitions.map((definition, index) => {
                       return (
                         <span key={index + definition}>

@@ -67,11 +67,8 @@ export default async function Search({
           })
         ) : (
           <div className="col-span-2 mt-auto flex w-full flex-row justify-center">
-            <h2 className="text-2xl">
-              No results found for{" "}
-              <span className="font-semibold tracking-wider">
-                {searchParams.q}
-              </span>
+            <h2 className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">
+              No results found for <strong>"{searchParams.q}"</strong>
             </h2>
           </div>
         )}
