@@ -59,7 +59,7 @@ const StrokeDiagram = ({
         writer && setWriters((prevWriters) => [...prevWriters, writer]);
       });
     }
-  }, []);
+  }, [theme]);
 
   useEffect(() => {
     if (tradSelected) {
