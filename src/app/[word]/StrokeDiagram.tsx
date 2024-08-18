@@ -28,8 +28,6 @@ const StrokeDiagram = ({
   const [writers, setWriters] = useState<HanziWriter[]>([]);
 
   useEffect(() => {
-    setWriters([]);
-
     const writerOptions = {
       width: 150,
       height: 150,
@@ -59,7 +57,7 @@ const StrokeDiagram = ({
         writer && setWriters((prevWriters) => [...prevWriters, writer]);
       });
     }
-  }, [theme]);
+  }, []);
 
   useEffect(() => {
     if (tradSelected) {
@@ -74,6 +72,13 @@ const StrokeDiagram = ({
       });
     }
   }, [simpCharsArray, tradCharsArray, tradSelected, writers]);
+  useEffect(() => {
+    writers.forEach((element, i) => {
+      (element._options.outlineColor = theme === "light" ? "#DDD" : "#3c3c3c"),
+        (element._options.strokeColor =
+          theme === "light" ? "#11181c" : "#ecedee");
+    });
+  }, [theme, writers]);
 
   return (
     <div className="embla w-[150px] overflow-hidden">
