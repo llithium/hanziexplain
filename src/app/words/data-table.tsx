@@ -59,6 +59,9 @@ export function DataTable<TData, TValue>({
   });
 
   useEffect(() => {
+    const index = table.getState().pagination.pageIndex;
+    const size = table.getState().pagination.pageSize;
+
     async function getData() {
       const supabase = createClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -70,17 +73,16 @@ export function DataTable<TData, TValue>({
         .order(sorting[0] ? sorting[0].id : "boost", {
           ascending: sorting[0] ? !sorting[0].desc : false,
         })
-        .range(
-          table.getState().pagination.pageIndex *
-            table.getState().pagination.pageSize,
-          (table.getState().pagination.pageIndex + 1) *
-            table.getState().pagination.pageSize -
-            1,
-        );
+        .order("hskLevel", {
+          ascending: true,
+        })
+        .order("id", {
+          ascending: true,
+        })
+        .range(index * size, (index + 1) * size - 1);
       if (error) {
         throw error;
       }
-      console.log(data);
 
       const parsedData =
         data &&
