@@ -53,3 +53,23 @@ test("Recently viewed in local storage", async ({ page }) => {
 
   await expect(page.getByText("太空探索")).toBeVisible();
 });
+
+test("Data table sort", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page).toHaveTitle(/Hanzi Explain/);
+
+  await page.goto("/words");
+
+  await expect(
+    page.getByText(
+      "Phonosemantic compound. 京 represents the meaning and 尤 represents the sound.",
+    ),
+  ).toBeVisible();
+
+  await page.getByRole("button", { name: "Frequency" }).click();
+
+  await page.getByRole("menuitem", { name: "Asc" }).click();
+
+  await expect(page.getByText("At symbol, @")).toBeVisible();
+});
