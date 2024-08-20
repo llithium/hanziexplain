@@ -18,14 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DataTablePagination } from "@/components/ui/table-pagination";
 import { DataTableViewOptions } from "@/components/ui/table-view-options";
 import { createClient } from "@supabase/supabase-js";
