@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import { DataTablePagination } from "@/components/ui/table-pagination";
 import { DataTableViewOptions } from "@/components/ui/table-view-options";
 import { createClient } from "@supabase/supabase-js";
+import { useQuery } from "@tanstack/react-query";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
 }
@@ -37,12 +38,9 @@ export function DataTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    // getPaginationRowModel: getPaginationRowModel(),
-    // manualPagination: true,
     rowCount: 116961,
     onSortingChange: setSorting,
     autoResetPageIndex: false,
-    // onPaginationChange: setPagination,
     getSortedRowModel: getSortedRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     state: {
@@ -50,52 +48,61 @@ export function DataTable<TData, TValue>({
       columnVisibility,
     },
   });
+  const index = table.getState().pagination.pageIndex;
+  const size = table.getState().pagination.pageSize;
+
+  const {
+    data: tableData,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["dataTableEntries", index, size, sorting],
+    queryFn: () => fetchDataTableEntries(index, size, sorting),
+    staleTime: Infinity,
+  });
 
   useEffect(() => {
-    const index = table.getState().pagination.pageIndex;
-    const size = table.getState().pagination.pageSize;
-
-    async function getData() {
-      const supabase = createClient(
-        process.env.NEXT_PUBLIC_SUPABASE_URL!,
-        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      );
-      const { data, error } = await supabase
-        .from("entries_data_table")
-        .select("*")
-        .order(sorting[0] ? sorting[0].id : "boost", {
-          ascending: sorting[0] ? !sorting[0].desc : false,
-        })
-        .order("hskLevel", {
-          ascending: true,
-        })
-        .order("id", {
-          ascending: true,
-        })
-        .range(index * size, (index + 1) * size - 1);
-      if (error) {
-        throw error;
-      }
-
-      const parsedData =
-        data &&
-        data.map((entry: any) => {
-          return {
-            ...entry,
-            definitions: entry.definitions ? JSON.parse(entry.definitions) : [],
-          };
-        });
-      setData(parsedData as TData[]);
+    if (tableData) {
+      setData(tableData);
     }
-    getData();
-  }, [
-    table.getState().pagination.pageIndex,
-    table.getState().pagination.pageSize,
-    sorting,
-  ]);
+  }, [tableData]);
+
+  async function fetchDataTableEntries(
+    index: number,
+    size: number,
+    sorting: SortingState,
+  ) {
+    const supabase = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    );
+    const { data, error } = await supabase
+      .from("entries_data_table")
+      .select("*")
+      .order(sorting[0] ? sorting[0].id : "boost", {
+        ascending: sorting[0] ? !sorting[0].desc : false,
+      })
+      .order("hskLevel", {
+        ascending: true,
+      })
+      .order("id", {
+        ascending: true,
+      })
+      .range(index * size, (index + 1) * size - 1);
+    if (error) {
+      throw error;
+    }
+
+    return data?.map((entry: any) => ({
+      ...entry,
+      definitions: entry.definitions ? JSON.parse(entry.definitions) : [],
+    })) as TData[];
+  }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div
+      className={`flex flex-col gap-2 transition-all ${isLoading && "animate-pulse"}`}
+    >
       <DataTableViewOptions table={table} />
 
       <div className="rounded-md border">
