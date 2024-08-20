@@ -1,11 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { DataTableColumnHeader } from "@/components/ui/column-header";
 import { capitalize } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { Entry } from "chinese-lexicon";
-import { ArrowUpDown } from "lucide-react";
 import Link from "next/link";
 
 export const columns: ColumnDef<Entry>[] = [
