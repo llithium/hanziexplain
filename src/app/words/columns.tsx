@@ -61,7 +61,7 @@ export const columns: ColumnDef<Entry>[] = [
     cell: ({ row }) => {
       const definitions: string[] = row.getValue("definitions");
       return (
-        <div className="min-w-96">
+        <div className="w-max max-w-96">
           {
             <p>
               {definitions.map((definition, index) => {
@@ -83,13 +83,22 @@ export const columns: ColumnDef<Entry>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Simplified Etymology" />
     ),
+    cell: ({ row }) => {
+      const simpEtymology: string = row.getValue("simpEtymology");
+      return <div className="w-max max-w-96">{simpEtymology}</div>;
+    },
   },
   {
     accessorKey: "tradEtymology",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Traditional Etymology" />
     ),
+    cell: ({ row }) => {
+      const tradEtymology: string = row.getValue("tradEtymology");
+      return <div className="w-max max-w-96">{tradEtymology}</div>;
+    },
   },
+
   {
     accessorKey: "hskLevel",
     header: ({ column }) => (
