@@ -65,8 +65,8 @@ const LightIcon = () => {
     <svg
       className="active:opacity-disabled transition-opacity hover:opacity-80"
       xmlns="http://www.w3.org/2000/svg"
-      width="1rem"
-      height="1rem"
+      width="1.2em"
+      height="1.2em"
       viewBox="0 0 24 24"
     >
       <path
@@ -82,8 +82,8 @@ const DarkIcon = () => {
     <svg
       className="active:opacity-disabled transition-opacity hover:opacity-80"
       xmlns="http://www.w3.org/2000/svg"
-      width="1rem"
-      height="1rem"
+      width="1.2em"
+      height="1.2em"
       viewBox="0 0 24 24"
     >
       <path
@@ -98,8 +98,8 @@ const SystemIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
+      width="1.2em"
+      height="1.2em"
       viewBox="0 0 24 24"
     >
       <path
