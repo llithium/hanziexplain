@@ -14,21 +14,28 @@ const Components = ({
 }) => {
   const { tradSelected } = useContext(TraditionalContext);
 
+  const showComponents =
+    (entries[currentEntry].simpEtymology &&
+      entries[currentEntry].simpEtymology.components.length > 0 &&
+      !tradSelected) ||
+    (entries[currentEntry].tradEtymology &&
+      entries[currentEntry].tradEtymology.components.length > 0 &&
+      tradSelected) ||
+    (entries[currentEntry].simp === entries[currentEntry].trad &&
+      entries[currentEntry].simpEtymology &&
+      entries[currentEntry].simpEtymology.components.length > 0);
+
   return (
     <>
       <div className="pb-2">
         <>
-          {((entries[currentEntry].simpEtymology &&
-            entries[currentEntry].simpEtymology.components.length > 0 &&
-            !tradSelected) ||
-            (entries[currentEntry].tradEtymology &&
-              entries[currentEntry].tradEtymology.components.length > 0 &&
-              tradSelected)) && (
+          {showComponents && (
             <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
               Components
             </h2>
           )}
-          {tradSelected ? (
+          {tradSelected &&
+          entries[currentEntry].simp !== entries[currentEntry].trad ? (
             <ul className="flex flex-wrap gap-x-20 gap-y-4">
               {entries[currentEntry].tradEtymology?.components &&
                 entries[currentEntry].tradEtymology?.components.map(
