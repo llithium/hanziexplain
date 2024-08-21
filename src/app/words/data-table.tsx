@@ -23,6 +23,7 @@ import { DataTablePagination } from "@/components/ui/table-pagination";
 import { DataTableViewOptions } from "@/components/ui/table-view-options";
 import { createClient } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
 }
@@ -33,6 +34,7 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [data, setData] = useState<TData[]>([]);
+  const searchParams = useSearchParams();
 
   const table = useReactTable({
     data,
@@ -43,6 +45,22 @@ export function DataTable<TData, TValue>({
     autoResetPageIndex: false,
     getSortedRowModel: getSortedRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    initialState: {
+      pagination: {
+        pageIndex: searchParams.get("index")
+          ? parseInt(searchParams.get("index")!)
+          : 0, //custom initial page index
+        pageSize: searchParams.get("size")
+          ? parseInt(searchParams.get("size")!)
+          : 10, //custom default page size
+      },
+      sorting: [
+        {
+          id: searchParams.get("sorting") || "frequency",
+          desc: searchParams.get("desc") === "true",
+        },
+      ],
+    },
     state: {
       sorting,
       columnVisibility,

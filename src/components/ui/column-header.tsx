@@ -1,3 +1,4 @@
+"use client";
 import { ArrowDownIcon, ArrowUpDown, ArrowUpIcon, EyeOff } from "lucide-react";
 import { Column } from "@tanstack/react-table";
 
@@ -10,6 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -25,7 +27,19 @@ export function DataTableColumnHeader<TData, TValue>({
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>;
   }
-
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const index = searchParams.get("index")
+    ? parseInt(searchParams.get("index")!)
+    : 0;
+  const size = searchParams.get("size")
+    ? parseInt(searchParams.get("size")!)
+    : 10;
+  const sorting = searchParams.get("sorting")
+    ? searchParams.get("sorting")!
+    : "frequency";
+  const desc = searchParams.get("desc") ? searchParams.get("desc")! : "false";
   return (
     <div className={cn("flex items-center space-x-2", className)}>
       <DropdownMenu>
@@ -48,11 +62,25 @@ export function DataTableColumnHeader<TData, TValue>({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">
-          <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
+          <DropdownMenuItem
+            onClick={() => {
+              column.toggleSorting(false);
+              router.push(
+                `${pathname}?index=${index}&size=${size}&sorting=${column.id}&desc=${false}`,
+              );
+            }}
+          >
             <ArrowUpIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Asc
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => column.toggleSorting(true)}>
+          <DropdownMenuItem
+            onClick={() => {
+              column.toggleSorting(true);
+              router.push(
+                `${pathname}?index=${index}&size=${size}&sorting=${column.id}&desc=${true}`,
+              );
+            }}
+          >
             <ArrowDownIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
             Desc
           </DropdownMenuItem>

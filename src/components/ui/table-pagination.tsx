@@ -1,3 +1,4 @@
+"use client";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -14,6 +15,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 interface DataTablePaginationProps<TData> {
   table: Table<TData>;
@@ -22,6 +25,9 @@ interface DataTablePaginationProps<TData> {
 export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
+  const router = useRouter();
+  const pathname = usePathname();
+
   return (
     <div className="flex items-center justify-between px-2">
       {/* <div className="flex-1 text-sm text-muted-foreground">
@@ -35,6 +41,9 @@ export function DataTablePagination<TData>({
             value={`${table.getState().pagination.pageSize}`}
             onValueChange={(value) => {
               table.setPageSize(Number(value));
+              router.push(
+                `${pathname}?index=${table.getState().pagination.pageIndex}&size=${Number(value)}&sorting=${table.getState().sorting[0]?.id}&desc=${table.getState().sorting[0]?.desc}`,
+              );
             }}
           >
             <SelectTrigger className="h-8 w-[70px]">
@@ -57,7 +66,12 @@ export function DataTablePagination<TData>({
           <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={() => table.setPageIndex(0)}
+            onClick={() => {
+              table.setPageIndex(0);
+              router.push(
+                `${pathname}?index=${0}&size=${table.getState().pagination.pageSize}&sorting=${table.getState().sorting[0]?.id}&desc=${table.getState().sorting[0]?.desc}`,
+              );
+            }}
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">Go to first page</span>
@@ -67,7 +81,12 @@ export function DataTablePagination<TData>({
           <Button
             variant="outline"
             className="h-8 w-8 p-0"
-            onClick={() => table.previousPage()}
+            onClick={() => {
+              router.push(
+                `${pathname}?index=${Math.max(0, table.getState().pagination.pageIndex - 1)}&size=${table.getState().pagination.pageSize}&sorting=${table.getState().sorting[0]?.id}&desc=${table.getState().sorting[0]?.desc}`,
+              );
+              table.previousPage();
+            }}
             disabled={!table.getCanPreviousPage()}
           >
             <span className="sr-only">Go to previous page</span>
@@ -76,7 +95,12 @@ export function DataTablePagination<TData>({
           <Button
             variant="outline"
             className="h-8 w-8 p-0"
-            onClick={() => table.nextPage()}
+            onClick={() => {
+              router.push(
+                `${pathname}?index=${Math.min(table.getPageCount() - 1, table.getState().pagination.pageIndex + 1)}&size=${table.getState().pagination.pageSize}&sorting=${table.getState().sorting[0]?.id}&desc=${table.getState().sorting[0]?.desc}`,
+              );
+              table.nextPage();
+            }}
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">Go to next page</span>
@@ -85,7 +109,12 @@ export function DataTablePagination<TData>({
           <Button
             variant="outline"
             className="hidden h-8 w-8 p-0 lg:flex"
-            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+            onClick={() => {
+              router.push(
+                `${pathname}?index=${table.getPageCount() - 1}&size=${table.getState().pagination.pageSize}&sorting=${table.getState().sorting[0]?.id}&desc=${table.getState().sorting[0]?.desc}`,
+              );
+              table.setPageIndex(table.getPageCount() - 1);
+            }}
             disabled={!table.getCanNextPage()}
           >
             <span className="sr-only">Go to last page</span>
