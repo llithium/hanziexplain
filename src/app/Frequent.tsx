@@ -5,6 +5,7 @@ import { TraditionalContext } from "../components/providers/traditional-provider
 import Link from "next/link";
 import { capitalize } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
 
 const Frequent = () => {
   const { tradSelected } = useContext(TraditionalContext);
@@ -692,27 +693,32 @@ const Frequent = () => {
     },
   ];
   return (
-    <div className="w-5/6 md:w-fit md:max-w-[550px] md:basis-1/2">
+    <div className="md:basis-1/2">
       <h2 className="py-2 text-center text-2xl font-semibold">
         Most Frequent Words
       </h2>
-      <ScrollArea className="h-[calc(100lvh-150px)] pr-2">
-        {mostFrequent100.slice(0, 100).map((word, i) => {
-          return (
-            <li key={i} className="flex gap-2">
-              <span className="w-6 self-end">{i + 1}.</span>
-              <Link
-                className="active:opacity-disabled inline-block transition-opacity *:font-hans *:text-3xl hover:opacity-80"
-                href={`/${word.simp}`}
-              >
-                <span>{tradSelected ? word.trad : word.simp}</span>
-              </Link>
-              <span className="self-end">
-                {capitalize(JSON.parse(word.definitions)[0])}
-              </span>
-            </li>
-          );
-        })}
+      <ScrollArea className="h-[calc(100lvh-150px)]">
+        <ul className="pr-2">
+          {mostFrequent100.slice(0, 100).map((word, i) => {
+            return (
+              <li key={i}>
+                <div className="flex items-end gap-2">
+                  <span className="w-6 self-end">{i + 1}.</span>
+                  <Link
+                    className="active:opacity-disabled inline-block transition-opacity *:font-hans *:text-3xl hover:opacity-80"
+                    href={`/${word.simp}`}
+                  >
+                    <span>{tradSelected ? word.trad : word.simp}</span>
+                  </Link>
+                  <span className="self-end">
+                    {capitalize(JSON.parse(word.definitions)[0])}
+                  </span>
+                </div>
+                <Separator className="my-1" />
+              </li>
+            );
+          })}
+        </ul>
       </ScrollArea>
     </div>
   );

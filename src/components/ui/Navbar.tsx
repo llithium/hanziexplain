@@ -166,7 +166,7 @@ export default function Navbar() {
       <div className="justify-self-end">
         <TraditionalSwitcher />
       </div>
-      <div className="justify-self-end pt-[7px]">
+      <div className="min-w-5 justify-self-end pt-[7px]">
         <ThemeSwitcher />
       </div>
       <div className="justify-self-end">
