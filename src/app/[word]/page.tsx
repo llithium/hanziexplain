@@ -8,6 +8,7 @@ import Statistics from "./Statistics";
 import UsedAsComponentIn from "./UsedAsComponentIn";
 import Definitions from "./Definitions";
 import EntryButton from "./EntryButton";
+import Examples from "./Examples";
 
 export async function generateMetadata({
   params,
@@ -32,7 +33,6 @@ export default async function Page({
   }
   const entries = (await res.json()) as Entry[];
   const currentEntry = searchParams.entry ? parseInt(searchParams.entry) : 0;
-  console.log(entries);
 
   function areEntriesSimilar(entries: Entry[]): boolean {
     if (entries.length === 0) return true;
@@ -82,6 +82,7 @@ export default async function Page({
         ) : null}
       </div>
       <Definitions entries={entries} currentEntry={currentEntry} />
+      <Examples entries={entries} currentEntry={currentEntry} />
       <Etymology entries={entries} currentEntry={currentEntry} />
       <Components entries={entries} currentEntry={currentEntry} />
       <UsedAsComponentIn entries={entries} currentEntry={currentEntry} />

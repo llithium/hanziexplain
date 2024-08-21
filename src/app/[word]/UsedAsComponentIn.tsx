@@ -12,7 +12,7 @@ const UsedAsComponentIn = ({
     <>
       {entries[currentEntry].usedAsComponentIn.simp.count == 0 &&
       entries[currentEntry].usedAsComponentIn.trad.count == 0 ? null : (
-        <div>
+        <div className="pb-2">
           <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
             Used As Component In
           </h2>

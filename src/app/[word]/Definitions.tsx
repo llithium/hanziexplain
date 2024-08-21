@@ -1,6 +1,5 @@
 import { capitalize } from "@/lib/utils";
 import { Entry } from "chinese-lexicon";
-import Link from "next/link";
 import DefinitionCharacters from "./DefinitionCharacters";
 
 const Definitions = ({
@@ -12,7 +11,7 @@ const Definitions = ({
 }) => {
   return (
     <>
-      <div>
+      <div className="pb-2">
         <h2 className="scroll-m-20 pb-2 text-3xl font-semibold tracking-tight first:mt-0">
           Definitions
         </h2>

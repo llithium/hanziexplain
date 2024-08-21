@@ -1,4 +1,3 @@
-import { allEntries } from "chinese-lexicon";
 import { columns } from "./columns";
 import { DataTable } from "./data-table";
 
