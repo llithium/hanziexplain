@@ -73,3 +73,31 @@ test("Data table sort", async ({ page }) => {
 
   await expect(page.getByText("At symbol, @")).toBeVisible();
 });
+
+test("Examples section", async ({ page }) => {
+  await page.goto("/做");
+
+  await expect(page.getByText("我无法取代她做英语老师。")).not.toBeVisible();
+
+  await expect(
+    page.getByText("I can't take the place of her as an English teacher."),
+  ).not.toBeVisible();
+
+  await page.getByRole("button", { name: "Examples Toggle" }).click();
+
+  await expect(page.getByText("我无法取代她做英语老师。")).toBeVisible();
+
+  await expect(
+    page.getByText("I can't take the place of her as an English teacher."),
+  ).toBeVisible();
+
+  await expect(
+    page.getByText("Simplified form of 門. Pictograph of a gate."),
+  ).not.toBeVisible();
+
+  await page.getByRole("button", { name: "Examples Toggle" }).click();
+
+  await expect(
+    page.getByText("I can't take the place of her as an English teacher."),
+  ).not.toBeVisible();
+});
