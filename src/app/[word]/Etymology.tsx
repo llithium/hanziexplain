@@ -37,30 +37,32 @@ const Etymology = ({
         </div>
       )}
       <ul className="flex h-full w-full items-center gap-2">
-        {entries[currentEntry].tradEtymology?.images.map((image, i) => {
-          return (
-            <li key={`trad-${i}`} className="flex flex-col items-center">
-              <img
-                className="h-32 w-32 rounded-sm dark:bg-current"
-                src={image.url.slice(5, -2)}
-                alt=""
-              />
-              <span className="text-sm">{image.caption}</span>
-            </li>
-          );
-        })}
-        {entries[currentEntry].simpEtymology?.images.map((image, i) => {
-          return (
-            <li key={`simp-${i}`} className="flex flex-col items-center">
-              <img
-                className="h-32 w-32 rounded-sm dark:bg-current"
-                src={image.url.slice(5, -2)}
-                alt=""
-              />
-              <span className="text-sm">{image.caption}</span>
-            </li>
-          );
-        })}
+        {tradSelected &&
+          entries[currentEntry].tradEtymology?.images.map((image, i) => {
+            return (
+              <li key={`trad-${i}`} className="flex flex-col items-center">
+                <img
+                  className="h-32 w-32 rounded-sm dark:bg-current"
+                  src={image.url.slice(5, -2)}
+                  alt=""
+                />
+                <span className="text-sm">{image.caption}</span>
+              </li>
+            );
+          })}
+        {!tradSelected &&
+          entries[currentEntry].simpEtymology?.images.map((image, i) => {
+            return (
+              <li key={`simp-${i}`} className="flex flex-col items-center">
+                <img
+                  className="h-32 w-32 rounded-sm dark:bg-current"
+                  src={image.url.slice(5, -2)}
+                  alt=""
+                />
+                <span className="text-sm">{image.caption}</span>
+              </li>
+            );
+          })}
       </ul>
     </>
   );

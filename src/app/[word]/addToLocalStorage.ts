@@ -8,7 +8,7 @@ export default function addToLocalStorage(entries: Entry[]) {
     let recentlyViewed: RecentlyViewed[] = JSON.parse(
       localStorage.getItem("recentlyViewed") || "[]",
     );
-    const recentlyViewedListSize = 20;
+    const recentlyViewedListSize = 100;
     const newPage = {
       simp: entries[0].simp,
       trad: entries[0].trad,
