@@ -5,15 +5,15 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { ChevronsUpDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Entry } from "chinese-lexicon";
 import { useQuery } from "@tanstack/react-query";
 import { createClient } from "@supabase/supabase-js";
 import { useContext } from "react";
 import { TraditionalContext } from "@/components/providers/traditional-provider";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-type Example = {
+export type Example = {
   id: number;
   zh_sentence_id: number;
   zh_sentence: string;
@@ -21,22 +21,11 @@ type Example = {
   en_sentence: string;
 };
 
-const Examples = ({
-  entries,
-  currentEntry,
-}: {
-  entries: Entry[];
-  currentEntry: number;
-}) => {
+const Examples = ({ simp, trad }: { simp: string; trad: string }) => {
   const { tradSelected } = useContext(TraditionalContext);
+  const pathname = usePathname();
   const { data, error, isLoading } = useQuery({
-    queryKey: [
-      "examples",
-      entries[currentEntry].simp,
-      entries[currentEntry].trad,
-      currentEntry,
-      tradSelected,
-    ],
+    queryKey: ["examples", simp, trad, tradSelected],
     queryFn: () => fetchExamples(),
     staleTime: Infinity,
   });
@@ -46,9 +35,7 @@ const Examples = ({
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     );
-    const query = tradSelected
-      ? entries[currentEntry].trad
-      : entries[currentEntry].simp;
+    const query = tradSelected ? trad : simp;
     const { data, error } = await supabase
       .from("example_sentences")
       .select("*")
@@ -100,6 +87,12 @@ const Examples = ({
                   <Separator />
                 </div>
               ))}
+              <Link
+                className="active:opacity-disabled ml-auto underline transition-opacity hover:opacity-80"
+                href={`${pathname}/examples`}
+              >
+                View All Examples.
+              </Link>
             </div>
           )}
         </CollapsibleContent>

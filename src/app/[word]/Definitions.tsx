@@ -2,13 +2,7 @@ import { capitalize } from "@/lib/utils";
 import { Entry } from "chinese-lexicon";
 import DefinitionCharacters from "./DefinitionCharacters";
 
-const Definitions = ({
-  entries,
-  currentEntry,
-}: {
-  entries: Entry[];
-  currentEntry: number;
-}) => {
+const Definitions = ({ entries }: { entries: Entry[] }) => {
   return (
     <>
       <div className="pb-2">

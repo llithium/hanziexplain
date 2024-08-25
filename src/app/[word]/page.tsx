@@ -81,8 +81,11 @@ export default async function Page({
           />
         ) : null}
       </div>
-      <Definitions entries={entries} currentEntry={currentEntry} />
-      <Examples entries={entries} currentEntry={currentEntry} />
+      <Definitions entries={entries} />
+      <Examples
+        simp={entries[currentEntry].simp}
+        trad={entries[currentEntry].trad}
+      />
       <Etymology entries={entries} currentEntry={currentEntry} />
       <Components entries={entries} currentEntry={currentEntry} />
       <UsedAsComponentIn entries={entries} currentEntry={currentEntry} />
