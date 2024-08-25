@@ -14,7 +14,7 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
               return (
                 <Link
                   key={char + i}
-                  href={char}
+                  href={`/${char}`}
                   className="active:opacity-disabled transition-opacity hover:opacity-80"
                 >
                   <span>{char}</span>
@@ -25,7 +25,7 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
               return (
                 <Link
                   key={char + i}
-                  href={char}
+                  href={`/${char}`}
                   className="active:opacity-disabled transition-opacity hover:opacity-80"
                 >
                   <span>{char}</span>
@@ -40,7 +40,7 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
             return (
               <Link
                 key={char + i}
-                href={char}
+                href={`/${char}`}
                 className="active:opacity-disabled transition-opacity hover:opacity-80"
               >
                 <span>{char}</span>
@@ -53,7 +53,7 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
             return (
               <Link
                 key={char + i}
-                href={char}
+                href={`/${char}`}
                 className="active:opacity-disabled transition-opacity hover:opacity-80"
               >
                 <span>{char}</span>
