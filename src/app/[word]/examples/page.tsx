@@ -2,6 +2,16 @@ import { capitalize, getURL } from "@/lib/utils";
 import ExamplesPage from "./ExamplesPage";
 import { Entry } from "chinese-lexicon";
 import DefinitionCharacters from "../DefinitionCharacters";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { word: string };
+}): Promise<Metadata> {
+  const word = decodeURIComponent(params.word);
+  return { title: `${word} Examples · Hanzi Explain` };
+}
 
 export default async function Page({ params }: { params: { word: string } }) {
   const res = await fetch(getURL() + "api/entries/" + params.word);

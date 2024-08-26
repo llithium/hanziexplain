@@ -71,7 +71,7 @@ test("Data table sort", async ({ page }) => {
 
   await page.getByRole("menuitem", { name: "Asc" }).click();
 
-  await expect(page.getByText("At symbol, @")).toBeVisible();
+  await expect(page.getByText("Archaic variant of 五[wǔ]")).toBeVisible();
 });
 
 test("Examples section", async ({ page }) => {
@@ -91,13 +91,39 @@ test("Examples section", async ({ page }) => {
     page.getByText("I can't take the place of her as an English teacher."),
   ).toBeVisible();
 
-  await expect(
-    page.getByText("Simplified form of 門. Pictograph of a gate."),
-  ).not.toBeVisible();
-
   await page.getByRole("button", { name: "Examples Toggle" }).click();
 
   await expect(
     page.getByText("I can't take the place of her as an English teacher."),
   ).not.toBeVisible();
+});
+
+test("Examples page", async ({ page }) => {
+  await page.goto("/做");
+
+  await expect(page.getByText("我无法取代她做英语老师。")).not.toBeVisible();
+
+  await expect(
+    page.getByText("I can't take the place of her as an English teacher."),
+  ).not.toBeVisible();
+
+  await page.getByRole("button", { name: "Examples Toggle" }).click();
+
+  await expect(page.getByText("我无法取代她做英语老师。")).toBeVisible();
+
+  await page.getByRole("link", { name: "View All Examples." }).click();
+
+  await expect(page).toHaveTitle(/做 Examples · Hanzi Explain/);
+
+  await expect(
+    page.getByRole("heading", { name: "Components" }),
+  ).not.toBeVisible();
+
+  await expect(
+    page.getByText("I can't take the place of her as an English teacher."),
+  ).toBeVisible();
+
+  await expect(
+    page.getByText("To do, To make, To produce, To write,"),
+  ).toBeVisible();
 });
