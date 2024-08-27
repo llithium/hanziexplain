@@ -20,6 +20,31 @@ export async function generateMetadata({
 }
 export const maxDuration = 30;
 
+export function areEntriesSimilar(entries: Entry[]): boolean {
+  if (entries.length === 0) return true;
+
+  const getComparableProps = (entry: Entry) => {
+    const {
+      definitions,
+      pinyin,
+      searchablePinyin,
+      pinyinTones,
+      boost,
+      statistics,
+      ...comparableProps
+    } = entry;
+    return comparableProps;
+  };
+
+  const firstEntryProps = getComparableProps(entries[0]);
+
+  return entries.every((entry) => {
+    const currentEntryProps = getComparableProps(entry);
+    return (
+      JSON.stringify(currentEntryProps) === JSON.stringify(firstEntryProps)
+    );
+  });
+}
 export default async function Page({
   params,
   searchParams,
@@ -33,32 +58,6 @@ export default async function Page({
   }
   const entries = (await res.json()) as Entry[];
   const currentEntry = searchParams.entry ? parseInt(searchParams.entry) : 0;
-
-  function areEntriesSimilar(entries: Entry[]): boolean {
-    if (entries.length === 0) return true;
-
-    const getComparableProps = (entry: Entry) => {
-      const {
-        definitions,
-        pinyin,
-        searchablePinyin,
-        pinyinTones,
-        boost,
-        statistics,
-        ...comparableProps
-      } = entry;
-      return comparableProps;
-    };
-
-    const firstEntryProps = getComparableProps(entries[0]);
-
-    return entries.every((entry) => {
-      const currentEntryProps = getComparableProps(entry);
-      return (
-        JSON.stringify(currentEntryProps) === JSON.stringify(firstEntryProps)
-      );
-    });
-  }
 
   return (
     <div className="mx-auto w-11/12 pb-6 md:w-10/12">

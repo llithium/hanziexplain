@@ -7,16 +7,18 @@ function EntryButton({
   entries,
   currentEntry,
   numberOfEntries,
+  examples,
 }: {
   entries: Entry[];
   currentEntry: number;
   numberOfEntries: number;
+  examples?: boolean;
 }) {
   const router = useRouter();
   const nextEntry = () => {
     if (currentEntry < numberOfEntries - 1) {
       router.push(
-        `/${entries[currentEntry + 1].simp}?entry=${currentEntry + 1}`,
+        `/${entries[currentEntry + 1].simp}${examples ? "/examples" : ""}?entry=${currentEntry + 1}`,
         { scroll: false },
       );
     }
@@ -24,7 +26,7 @@ function EntryButton({
   const prevEntry = () => {
     if (currentEntry > 0) {
       router.push(
-        `/${entries[currentEntry - 1].simp}?entry=${currentEntry - 1}`,
+        `/${entries[currentEntry - 1].simp}${examples ? "/examples" : ""}?entry=${currentEntry - 1}`,
         { scroll: false },
       );
     }
