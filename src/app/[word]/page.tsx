@@ -58,6 +58,7 @@ export default async function Page({
   }
   const entries = (await res.json()) as Entry[];
   const currentEntry = searchParams.entry ? parseInt(searchParams.entry) : 0;
+  const showEntries = entries.length > 1 && !areEntriesSimilar(entries);
 
   return (
     <div className="mx-auto w-11/12 pb-6 md:w-10/12">
@@ -72,7 +73,7 @@ export default async function Page({
             </span>
           ))}
         </div>
-        {entries.length > 1 && !areEntriesSimilar(entries) ? (
+        {showEntries ? (
           <EntryButton
             entries={entries}
             currentEntry={currentEntry}
@@ -80,7 +81,11 @@ export default async function Page({
           />
         ) : null}
       </div>
-      <Definitions entries={entries} />
+      <Definitions
+        currentEntry={currentEntry}
+        entries={entries}
+        showEntries={showEntries}
+      />
       <Examples
         simp={entries[currentEntry].simp}
         trad={entries[currentEntry].trad}

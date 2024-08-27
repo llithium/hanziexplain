@@ -29,6 +29,7 @@ export default async function Page({
   }
   const entries = (await res.json()) as Entry[];
   const currentEntry = searchParams.entry ? parseInt(searchParams.entry) : 0;
+  const showEntries = entries.length > 1 && !areEntriesSimilar(entries);
 
   return (
     <div className="mx-auto w-11/12 pb-6 md:w-10/12">
@@ -38,7 +39,12 @@ export default async function Page({
             return (
               <div className="flex flex-col" key={i}>
                 <div>
-                  <DefinitionCharacters entry={entry} />
+                  <DefinitionCharacters
+                    entry={entry}
+                    currentEntry={currentEntry}
+                    place={i}
+                    showEntries={showEntries}
+                  />
                   <span className="pl-2">{entry.pinyin}</span>
                   <p className="text-base leading-7">
                     {entry.definitions.map((definition, index) => {

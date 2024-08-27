@@ -4,7 +4,17 @@ import { Entry } from "chinese-lexicon";
 import Link from "next/link";
 import { useContext } from "react";
 
-const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
+const DefinitionCharacters = ({
+  entry,
+  currentEntry,
+  place,
+  showEntries,
+}: {
+  entry: Entry;
+  currentEntry: number;
+  place: number;
+  showEntries: boolean;
+}) => {
   const { tradSelected } = useContext(TraditionalContext);
   return (
     <div className="inline-flex gap-2">
@@ -17,7 +27,11 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
                   href={`/${char}`}
                   className="active:opacity-disabled transition-opacity hover:opacity-80"
                 >
-                  <span>{char}</span>
+                  <span
+                    className={`${showEntries && currentEntry === place && "text-primary transition-all"}`}
+                  >
+                    {char}
+                  </span>
                 </Link>
               );
             })
@@ -28,7 +42,11 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
                   href={`/${char}`}
                   className="active:opacity-disabled transition-opacity hover:opacity-80"
                 >
-                  <span>{char}</span>
+                  <span
+                    className={`${showEntries && currentEntry === place && "text-primary transition-all"}`}
+                  >
+                    {char}
+                  </span>
                 </Link>
               );
             })}
@@ -43,7 +61,11 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
                 href={`/${char}`}
                 className="active:opacity-disabled transition-opacity hover:opacity-80"
               >
-                <span>{char}</span>
+                <span
+                  className={`${showEntries && currentEntry === place && "text-primary transition-all"}`}
+                >
+                  {char}
+                </span>
               </Link>
             );
           })}
@@ -56,7 +78,11 @@ const DefinitionCharacters = ({ entry }: { entry: Entry }) => {
                 href={`/${char}`}
                 className="active:opacity-disabled transition-opacity hover:opacity-80"
               >
-                <span>{char}</span>
+                <span
+                  className={`${showEntries && currentEntry === place && "text-primary transition-all"}`}
+                >
+                  {char}
+                </span>
               </Link>
             );
           })}
