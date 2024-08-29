@@ -47,7 +47,7 @@ const Components = ({
                             className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${Component.char}`}
                           >
-                            <span className="text-lg">{Component.char}</span>
+                            <span className="text-2xl">{Component.char}</span>
                           </Link>
                           <span>{Component.pinyin}</span>
                         </div>
@@ -74,7 +74,7 @@ const Components = ({
                             className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${Component.char}`}
                           >
-                            <span className="text-lg">{Component.char}</span>
+                            <span className="text-2xl">{Component.char}</span>
                           </Link>
                           <span>{Component.pinyin}</span>
                         </div>

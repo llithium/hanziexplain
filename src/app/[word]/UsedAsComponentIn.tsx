@@ -40,7 +40,7 @@ const UsedAsComponentIn = ({
                             className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${component}`}
                           >
-                            <span>{component}</span>
+                            <span className="text-2xl">{component}</span>
                           </Link>
                         );
                       })}
@@ -63,7 +63,7 @@ const UsedAsComponentIn = ({
                               className="active:opacity-disabled transition-opacity hover:opacity-80"
                               href={`/${component}`}
                             >
-                              <span>{component}</span>
+                              <span className="text-2xl">{component}</span>
                             </Link>
                           );
                         },
@@ -87,7 +87,7 @@ const UsedAsComponentIn = ({
                               className="active:opacity-disabled transition-opacity hover:opacity-80"
                               href={`/${component}`}
                             >
-                              <span>{component}</span>
+                              <span className="text-2xl">{component}</span>
                             </Link>
                           );
                         },
@@ -113,7 +113,7 @@ const UsedAsComponentIn = ({
                               className="active:opacity-disabled transition-opacity hover:opacity-80"
                               href={`/${component}`}
                             >
-                              <span>{component}</span>
+                              <span className="text-2xl">{component}</span>
                             </Link>
                           );
                         },
@@ -146,7 +146,7 @@ const UsedAsComponentIn = ({
                             className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${component}`}
                           >
-                            <span>{component}</span>
+                            <span className="text-2xl">{component}</span>
                           </Link>
                         );
                       })}
@@ -169,7 +169,7 @@ const UsedAsComponentIn = ({
                               className="active:opacity-disabled transition-opacity hover:opacity-80"
                               href={`/${component}`}
                             >
-                              <span>{component}</span>
+                              <span className="text-2xl">{component}</span>
                             </Link>
                           );
                         },
@@ -193,7 +193,7 @@ const UsedAsComponentIn = ({
                               className="active:opacity-disabled transition-opacity hover:opacity-80"
                               href={`/${component}`}
                             >
-                              <span>{component}</span>
+                              <span className="text-2xl">{component}</span>
                             </Link>
                           );
                         },

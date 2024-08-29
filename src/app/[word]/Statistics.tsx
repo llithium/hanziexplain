@@ -52,14 +52,14 @@ const Statistics = ({
                             className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${word.trad}`}
                           >
-                            <span className="text-lg">{word.trad}</span>
+                            <span className="text-2xl">{word.trad}</span>
                           </Link>
                         ) : (
                           <Link
                             className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${word.word}`}
                           >
-                            <span className="text-lg">{word.word}</span>
+                            <span className="text-2xl">{word.word}</span>
                           </Link>
                         )}
 
@@ -68,7 +68,7 @@ const Statistics = ({
                             className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${word.word}`}
                           >
-                            <span className="text-lg">{word.word}</span>
+                            <span className="text-2xl">{word.word}</span>
                           </Link>
                         )}
                         {!tradSelected && word.word !== word.trad && (
@@ -76,7 +76,7 @@ const Statistics = ({
                             className="active:opacity-disabled transition-opacity hover:opacity-80"
                             href={`/${word.trad}`}
                           >
-                            <span className="text-lg">{word.trad}</span>
+                            <span className="text-2xl">{word.trad}</span>
                           </Link>
                         )}
                       </div>
