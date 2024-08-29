@@ -28,7 +28,7 @@ const DefinitionCharacters = ({
                   className="active:opacity-disabled transition-opacity hover:opacity-80"
                 >
                   <span
-                    className={`${showEntries && currentEntry === place && "text-primary transition-all"}`}
+                    className={`text-2xl ${showEntries && currentEntry === place && "text-3xl transition-all"}`}
                   >
                     {char}
                   </span>
@@ -43,7 +43,7 @@ const DefinitionCharacters = ({
                   className="active:opacity-disabled transition-opacity hover:opacity-80"
                 >
                   <span
-                    className={`${showEntries && currentEntry === place && "text-primary transition-all"}`}
+                    className={`text-2xl ${showEntries && currentEntry === place && "text-3xl transition-all"}`}
                   >
                     {char}
                   </span>
@@ -62,7 +62,7 @@ const DefinitionCharacters = ({
                 className="active:opacity-disabled transition-opacity hover:opacity-80"
               >
                 <span
-                  className={`${showEntries && currentEntry === place && "text-primary transition-all"}`}
+                  className={`text-2xl ${showEntries && currentEntry === place && "text-3xl transition-all"}`}
                 >
                   {char}
                 </span>
@@ -79,7 +79,7 @@ const DefinitionCharacters = ({
                 className="active:opacity-disabled transition-opacity hover:opacity-80"
               >
                 <span
-                  className={`${showEntries && currentEntry === place && "text-primary transition-all"}`}
+                  className={`text-2xl ${showEntries && currentEntry === place && "text-3xl transition-all"}`}
                 >
                   {char}
                 </span>
