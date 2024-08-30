@@ -14,7 +14,10 @@ const SearchInput = () => {
   useEffect(() => {
     if (rendered && debouncedSearchTerm !== "") {
       router.push(`/search?q=${debouncedSearchTerm}`);
+    } else if (rendered && debouncedSearchTerm === "") {
+      router.push(`/`);
     }
+
     setRendered(true);
   }, [debouncedSearchTerm, router]);
 

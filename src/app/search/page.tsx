@@ -1,9 +1,9 @@
 import { SearchResult } from "chinese-lexicon";
 import { Metadata } from "next";
 import Link from "next/link";
-import { getURL } from "@/lib/utils";
 import Characters from "./Characters";
 import { Separator } from "@/components/ui/separator";
+import { createClient } from "@/lib/supabase/server";
 
 export async function generateMetadata({
   searchParams,
@@ -23,16 +23,35 @@ export default async function Search({
 }: {
   searchParams: { q: string };
 }) {
-  const res =
-    searchParams.q !== ""
-      ? await fetch(getURL() + "api/search?q=" + searchParams.q)
-      : null;
-  if (res && !res.ok) {
-    throw new Error(`Error:${res.status}, ${res.statusText}`);
-  }
+  const supabase = createClient();
+  const { data, error } = await supabase.rpc(`search_entries`, {
+    search_term: searchParams.q,
+  });
 
-  const searchResults =
-    res !== null ? ((await res.json()) as SearchResult[]) : [];
+  if (error) {
+    throw error;
+  }
+  const searchResults = data as SearchResult[];
+  searchResults.forEach((entry) => {
+    if (typeof entry.definitions === "string" && entry.definitions !== "") {
+      entry.definitions = JSON.parse(entry.definitions);
+    }
+    if (typeof entry.statistics === "string" && entry.statistics !== "") {
+      entry.statistics = JSON.parse(entry.statistics);
+    }
+    if (
+      typeof entry.usedAsComponentIn === "string" &&
+      entry.usedAsComponentIn !== ""
+    ) {
+      entry.usedAsComponentIn = JSON.parse(entry.usedAsComponentIn);
+    }
+    if (typeof entry.simpEtymology === "string" && entry.simpEtymology !== "") {
+      entry.simpEtymology = JSON.parse(entry.simpEtymology);
+    }
+    if (typeof entry.tradEtymology === "string" && entry.tradEtymology !== "") {
+      entry.tradEtymology = JSON.parse(entry.tradEtymology);
+    }
+  });
 
   return (
     <div className="mx-auto px-2 pb-6 lg:w-10/12 lg:px-0">

@@ -38,7 +38,7 @@ const Etymology = ({
       )}
       <ul className="flex h-full w-full items-center gap-2">
         {tradSelected &&
-          entries[currentEntry].tradEtymology?.images.map((image, i) => {
+          entries[currentEntry].tradEtymology?.images?.map((image, i) => {
             return (
               <li key={`trad-${i}`} className="flex flex-col items-center">
                 <img
@@ -51,7 +51,7 @@ const Etymology = ({
             );
           })}
         {!tradSelected &&
-          entries[currentEntry].simpEtymology?.images.map((image, i) => {
+          entries[currentEntry].simpEtymology?.images?.map((image, i) => {
             return (
               <li key={`simp-${i}`} className="flex flex-col items-center">
                 <img

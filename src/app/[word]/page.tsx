@@ -1,7 +1,6 @@
 import { Entry } from "chinese-lexicon";
 import { Metadata } from "next";
 import StrokeDiagram from "./StrokeDiagram";
-import { getURL } from "@/lib/utils";
 import Etymology from "./Etymology";
 import Components from "./Components";
 import Statistics from "./Statistics";
@@ -9,6 +8,7 @@ import UsedAsComponentIn from "./UsedAsComponentIn";
 import Definitions from "./Definitions";
 import EntryButton from "./EntryButton";
 import Examples from "./Examples";
+import { createClient } from "@/lib/supabase/server";
 
 export async function generateMetadata({
   params,
@@ -52,11 +52,40 @@ export default async function Page({
   params: { word: string };
   searchParams: { [key: string]: string | undefined };
 }) {
-  const res = await fetch(getURL() + "api/entries/" + params.word);
-  if (!res.ok) {
-    throw new Error(`Error:${res.status}, ${res.statusText}`);
+  const word = decodeURI(params.word);
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("entries")
+    .select("*")
+    .or(`simp.eq.${word},trad.eq.${word}`)
+    .order("boost", { ascending: false });
+
+  if (error) {
+    throw error;
   }
-  const entries = (await res.json()) as Entry[];
+
+  const entries = data as Entry[];
+  entries.forEach((entry) => {
+    if (typeof entry.definitions === "string" && entry.definitions !== "") {
+      entry.definitions = JSON.parse(entry.definitions);
+    }
+    if (typeof entry.statistics === "string" && entry.statistics !== "") {
+      entry.statistics = JSON.parse(entry.statistics);
+    }
+    if (
+      typeof entry.usedAsComponentIn === "string" &&
+      entry.usedAsComponentIn !== ""
+    ) {
+      entry.usedAsComponentIn = JSON.parse(entry.usedAsComponentIn);
+    }
+    if (typeof entry.simpEtymology === "string" && entry.simpEtymology !== "") {
+      entry.simpEtymology = JSON.parse(entry.simpEtymology);
+    }
+    if (typeof entry.tradEtymology === "string" && entry.tradEtymology !== "") {
+      entry.tradEtymology = JSON.parse(entry.tradEtymology);
+    }
+  });
+
   const currentEntry = searchParams.entry ? parseInt(searchParams.entry) : 0;
   const showEntries = entries.length > 1 && !areEntriesSimilar(entries);
 
