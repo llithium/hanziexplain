@@ -60,7 +60,11 @@ export default async function Page({
     .or(`simp.eq.${word},trad.eq.${word}`)
     .order("boost", { ascending: false });
 
+  console.log("Data: ", data);
+
   if (error) {
+    console.log("Error: ", error);
+
     throw error;
   }
 
@@ -91,38 +95,48 @@ export default async function Page({
 
   return (
     <div className="mx-auto w-11/12 pb-6 md:w-10/12">
-      <div className="flex h-fit w-full items-end justify-between gap-2 font-hans">
-        <div className="flex items-end gap-2">
-          <StrokeDiagram entries={entries} currentEntry={currentEntry} />
+      {entries[currentEntry] ? (
+        <>
+          <div className="flex h-fit w-full items-end justify-between gap-2 font-hans">
+            <div className="flex items-end gap-2">
+              <StrokeDiagram entries={entries} currentEntry={currentEntry} />
 
-          {entries.map((entry, index) => (
-            <span key={entry.boost + index} className="font-sans text-2xl">
-              {entry.pinyin}
-              {index !== entries.length - 1 && ", "}
-            </span>
-          ))}
-        </div>
-        {showEntries ? (
-          <EntryButton
-            entries={entries}
+              {entries.map((entry, index) => (
+                <span key={entry.boost + index} className="font-sans text-2xl">
+                  {entry.pinyin}
+                  {index !== entries.length - 1 && ", "}
+                </span>
+              ))}
+            </div>
+            {showEntries ? (
+              <EntryButton
+                entries={entries}
+                currentEntry={currentEntry}
+                numberOfEntries={entries.length}
+              />
+            ) : null}
+          </div>
+          <Definitions
             currentEntry={currentEntry}
-            numberOfEntries={entries.length}
+            entries={entries}
+            showEntries={showEntries}
           />
-        ) : null}
-      </div>
-      <Definitions
-        currentEntry={currentEntry}
-        entries={entries}
-        showEntries={showEntries}
-      />
-      <Examples
-        simp={entries[currentEntry].simp}
-        trad={entries[currentEntry].trad}
-      />
-      <Etymology entries={entries} currentEntry={currentEntry} />
-      <Components entries={entries} currentEntry={currentEntry} />
-      <UsedAsComponentIn entries={entries} currentEntry={currentEntry} />
-      <Statistics entries={entries} currentEntry={currentEntry} />
+          <Examples
+            simp={entries[currentEntry].simp}
+            trad={entries[currentEntry].trad}
+          />
+          <Etymology entries={entries} currentEntry={currentEntry} />
+          <Components entries={entries} currentEntry={currentEntry} />
+          <UsedAsComponentIn entries={entries} currentEntry={currentEntry} />
+          <Statistics entries={entries} currentEntry={currentEntry} />
+        </>
+      ) : (
+        <div className="col-span-2 mt-auto flex w-full flex-row justify-center">
+          <h2 className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">
+            No entry found for <strong>{word}</strong>
+          </h2>
+        </div>
+      )}
     </div>
   );
 }
