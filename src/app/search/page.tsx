@@ -5,11 +5,12 @@ import Characters from "./Characters";
 import { Separator } from "@/components/ui/separator";
 import { createClient } from "@/lib/supabase/server";
 
-export async function generateMetadata({
-  searchParams,
-}: {
-  searchParams: { q: string };
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    searchParams: Promise<{ q: string }>;
+  }
+): Promise<Metadata> {
+  const searchParams = await props.searchParams;
   const search = searchParams.q;
 
   return {
@@ -18,11 +19,12 @@ export async function generateMetadata({
 }
 export const maxDuration = 30;
 
-export default async function Search({
-  searchParams,
-}: {
-  searchParams: { q: string };
-}) {
+export default async function Search(
+  props: {
+    searchParams: Promise<{ q: string }>;
+  }
+) {
+  const searchParams = await props.searchParams;
   const supabase = createClient();
   const { data, error } = await supabase.rpc(`search_entries`, {
     search_term: searchParams.q,

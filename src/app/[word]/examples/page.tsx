@@ -6,23 +6,25 @@ import { Metadata } from "next";
 import EntryButton from "../EntryButton";
 import { areEntriesSimilar } from "../page";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { word: string };
-  searchParams: { [key: string]: string | undefined };
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ word: string }>;
+    searchParams: Promise<{ [key: string]: string | undefined }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
   const word = decodeURIComponent(params.word);
   return { title: `${word} Examples · Hanzi Explain` };
 }
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { word: string };
-  searchParams: { [key: string]: string | undefined };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ word: string }>;
+    searchParams: Promise<{ [key: string]: string | undefined }>;
+  }
+) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const res = await fetch(getURL() + "api/entries/" + params.word);
   if (!res.ok) {
     throw new Error(`Error:${res.status}, ${res.statusText}`);

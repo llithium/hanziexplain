@@ -10,11 +10,10 @@ import EntryButton from "./EntryButton";
 import Examples from "./Examples";
 import { createClient } from "@/lib/supabase/server";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { word: string };
+export async function generateMetadata(props: {
+  params: Promise<{ word: string }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const word = decodeURIComponent(params.word);
   return { title: `${word} · Hanzi Explain` };
 }
@@ -45,13 +44,12 @@ export function areEntriesSimilar(entries: Entry[]): boolean {
     );
   });
 }
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { word: string };
-  searchParams: { [key: string]: string | undefined };
+export default async function Page(props: {
+  params: Promise<{ word: string }>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const word = decodeURI(params.word);
   const supabase = createClient();
   const { data, error } = await supabase
@@ -59,12 +57,7 @@ export default async function Page({
     .select("*")
     .or(`simp.eq.${word},trad.eq.${word}`)
     .order("boost", { ascending: false });
-
-  console.log("Data: ", data);
-
   if (error) {
-    console.log("Error: ", error);
-
     throw error;
   }
 
