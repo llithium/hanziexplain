@@ -5,31 +5,34 @@ import DefinitionCharacters from "../DefinitionCharacters";
 import { Metadata } from "next";
 import EntryButton from "../EntryButton";
 import { areEntriesSimilar } from "../page";
+import { createClient } from "@/lib/supabase/server";
 
-export async function generateMetadata(
-  props: {
-    params: Promise<{ word: string }>;
-    searchParams: Promise<{ [key: string]: string | undefined }>;
-  }
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ word: string }>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}): Promise<Metadata> {
   const params = await props.params;
   const word = decodeURIComponent(params.word);
   return { title: `${word} Examples · Hanzi Explain` };
 }
 
-export default async function Page(
-  props: {
-    params: Promise<{ word: string }>;
-    searchParams: Promise<{ [key: string]: string | undefined }>;
-  }
-) {
+export default async function Page(props: {
+  params: Promise<{ word: string }>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}) {
   const searchParams = await props.searchParams;
   const params = await props.params;
-  const res = await fetch(getURL() + "api/entries/" + params.word);
-  if (!res.ok) {
-    throw new Error(`Error:${res.status}, ${res.statusText}`);
+  const supabase = createClient();
+  const { data, error } = await supabase.rpc(`get_entries`, {
+    search_term: decodeURIComponent(params.word),
+  });
+
+  if (error) {
+    throw error;
   }
-  const entries = (await res.json()) as Entry[];
+  const entries = data as Entry[];
+  console.log(entries);
+
   const currentEntry = searchParams.entry ? parseInt(searchParams.entry) : 0;
   const showEntries = entries.length > 1 && !areEntriesSimilar(entries);
 
@@ -38,6 +41,9 @@ export default async function Page(
       <div className="flex items-center justify-between">
         <div className="flex flex-col gap-3 pb-2 text-lg">
           {entries.map((entry, i) => {
+            const definitions: string[] = JSON.parse(
+              entry.definitions as unknown as string,
+            );
             return (
               <div className="flex flex-col" key={i}>
                 <div>
@@ -49,11 +55,11 @@ export default async function Page(
                   />
                   <span className="pl-2">{entry.pinyin}</span>
                   <p className="text-base leading-7">
-                    {entry.definitions.map((definition, index) => {
+                    {definitions.map((definition, index) => {
                       return (
                         <span key={index + definition}>
                           {capitalize(definition)}
-                          {index !== entry.definitions.length - 1 && ", "}
+                          {index !== definitions.length - 1 && ", "}
                         </span>
                       );
                     })}

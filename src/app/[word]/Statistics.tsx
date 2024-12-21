@@ -1,6 +1,6 @@
 "use client";
 import { TraditionalContext } from "@/components/providers/traditional-provider";
-import addToLocalStorage from "./addToLocalStorage";
+import useAddToLocalStorage from "./useAddToLocalStorage";
 import { capitalize } from "@/lib/utils";
 import { Entry } from "chinese-lexicon";
 import Link from "next/link";
@@ -14,7 +14,7 @@ const Statistics = ({
   currentEntry: number;
 }) => {
   const { tradSelected } = useContext(TraditionalContext);
-  addToLocalStorage(entries);
+  useAddToLocalStorage(entries);
 
   return (
     <>

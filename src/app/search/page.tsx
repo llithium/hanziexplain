@@ -5,11 +5,9 @@ import Characters from "./Characters";
 import { Separator } from "@/components/ui/separator";
 import { createClient } from "@/lib/supabase/server";
 
-export async function generateMetadata(
-  props: {
-    searchParams: Promise<{ q: string }>;
-  }
-): Promise<Metadata> {
+export async function generateMetadata(props: {
+  searchParams: Promise<{ q: string }>;
+}): Promise<Metadata> {
   const searchParams = await props.searchParams;
   const search = searchParams.q;
 
@@ -19,11 +17,9 @@ export async function generateMetadata(
 }
 export const maxDuration = 30;
 
-export default async function Search(
-  props: {
-    searchParams: Promise<{ q: string }>;
-  }
-) {
+export default async function Search(props: {
+  searchParams: Promise<{ q: string }>;
+}) {
   const searchParams = await props.searchParams;
   const supabase = createClient();
   const { data, error } = await supabase.rpc(`search_entries`, {
@@ -89,7 +85,7 @@ export default async function Search(
         ) : (
           <div className="col-span-2 mt-auto flex w-full flex-row justify-center">
             <h2 className="scroll-m-20 border-b pb-2 text-2xl font-semibold tracking-tight first:mt-0">
-              No results found for <strong>"{searchParams.q}"</strong>
+              No results found for <strong>&quot;{searchParams.q}&quot;</strong>
             </h2>
           </div>
         )}

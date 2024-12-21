@@ -2,8 +2,9 @@ import RecentlyViewed from "@/app/RecentlyViewed";
 import { Entry } from "chinese-lexicon";
 import { usePathname } from "next/navigation";
 
-export default function addToLocalStorage(entries: Entry[]) {
+export default function useAddToLocalStorage(entries: Entry[]) {
   if (typeof window !== "undefined") {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const pathname = decodeURI(usePathname());
     let recentlyViewed: RecentlyViewed[] = JSON.parse(
       localStorage.getItem("recentlyViewed") || "[]",

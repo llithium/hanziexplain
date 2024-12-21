@@ -27,8 +27,11 @@ export function DataTableColumnHeader<TData, TValue>({
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>;
   }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const searchParams = useSearchParams();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const pathname = usePathname();
   const index = searchParams.get("index")
     ? parseInt(searchParams.get("index")!)
