@@ -28,7 +28,7 @@ const DefinitionCharacters = ({
                   className="active:opacity-disabled transition-opacity hover:opacity-80"
                 >
                   <span
-                    className={`text-2xl ${showEntries && currentEntry === place && "text-3xl transition-all"}`}
+                    className={`text-2xl ${showEntries && currentEntry === place && "text-3xl"}`}
                   >
                     {char}
                   </span>
@@ -43,7 +43,7 @@ const DefinitionCharacters = ({
                   className="active:opacity-disabled transition-opacity hover:opacity-80"
                 >
                   <span
-                    className={`text-2xl ${showEntries && currentEntry === place && "text-3xl transition-all"}`}
+                    className={`text-2xl ${showEntries && currentEntry === place && "text-3xl"}`}
                   >
                     {char}
                   </span>
